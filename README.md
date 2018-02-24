@@ -1,5 +1,7 @@
 # Home Assistant configuration
 
+[![Build Status](https://travis-ci.org/anton-johansson/home-assistant-config.svg?branch=master)](https://travis-ci.org/anton-johansson/home-assistant-config)
+
 The configuration for my Home Assistant.
 
 
