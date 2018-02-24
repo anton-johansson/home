@@ -1,0 +1,48 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: metric
+  time_zone: Europe/Stockholm
+  customize: !include customize.yaml
+
+frontend:
+
+config:
+
+http:
+  api_password: !secret http_password
+
+updater:
+
+zwave:
+  usb_path: /dev/ttyACM0
+
+ios:
+
+discovery:
+
+conversation:
+
+history:
+
+recorder:
+  purge_keep_days: 10
+
+logbook:
+
+map:
+
+sun:
+
+tts:
+  - platform: google
+
+cloud:
+
+group: !include groups.yaml
+automation: !include automations/washing_machine.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensor
+input_boolean: !include input_boolean/triggers.yaml

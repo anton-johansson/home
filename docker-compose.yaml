@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  home-assistant:
+    image: homeassistant/home-assistant:0.63.3
+    container_name: home-assistant
+    restart: always
+    network_mode: host
+    ports: 
+      - '8123:8123'
+    volumes:
+      - /home/$USER/projects/home-assistant-config:/config
+      - /etc/localtime:/etc/localtime:ro
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0

@@ -1,0 +1,5 @@
+- platform: template
+  sensors:
+    washing_machine:
+      friendly_name: 'Washing machine power usage'
+      value_template: '{{ states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state }}'
