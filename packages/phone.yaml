@@ -1,0 +1,21 @@
+#
+# Location and state of the cellphone
+#
+
+homeassistant:
+  customize:
+    device_tracker.iphone:
+      friendly_name: Location
+      icon: mdi:map-marker
+    sensor.iphone_battery_level:
+      friendly_name: Battery level
+    sensor.iphone_battery_state:
+      friendly_name: State
+
+group:
+  phone:
+    name: Phone
+    entities:
+      - device_tracker.iphone
+      - sensor.iphone_battery_level
+      - sensor.iphone_battery_state

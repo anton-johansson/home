@@ -1,8 +1,8 @@
 homeassistant:
   name: Home
-  latitude: !secret latitude
-  longitude: !secret longitude
-  elevation: !secret elevation
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
   unit_system: metric
   time_zone: Europe/Stockholm
   packages: !include_dir_named packages
@@ -44,3 +44,4 @@ cloud:
 
 group: !include groups.yaml
 script: !include scripts.yaml
+zone: !include zones.yaml
