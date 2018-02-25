@@ -5,17 +5,17 @@
 homeassistant:
   customize:
     automation.washing_machine_started:
-      friendly_name: 'Washing machine started'
       icon: mdi:washing-machine
     automation.washing_machine_completed:
-      friendly_name: 'Washing machine completed'
       icon: mdi:washing-machine
     sensor.washing_machine:
       icon: mdi:washing-machine
 
 automation:
+
   # Set the washing machine in busy state
-  - alias: washing_machine_started
+  - id: washing_machine_started
+    alias: 'Washing machine started'
     trigger:
       - platform: numeric_state
         entity_id: sensor.washing_machine
@@ -27,8 +27,10 @@ automation:
     action:
       - service: input_boolean.turn_on
         entity_id: input_boolean.washing_machine_busy
+
     # Set the washing machine in ready state and notify about completion
-  - alias: washing_machine_completed
+  - id: washing_machine_completed
+    alias: 'Washing machine completed'
     trigger:
       - platform: numeric_state
         entity_id: sensor.washing_machine
