@@ -1,0 +1,69 @@
+#
+# Washing machine
+#
+
+homeassistant:
+  customize:
+    automation.washing_machine_started:
+      friendly_name: 'Washing machine started'
+      icon: mdi:washing-machine
+    automation.washing_machine_completed:
+      friendly_name: 'Washing machine completed'
+      icon: mdi:washing-machine
+    sensor.washing_machine:
+      icon: mdi:washing-machine
+
+automation:
+  # Set the washing machine in busy state
+  - alias: washing_machine_started
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.washing_machine
+        above: 5
+    condition:
+      condition: state
+      entity_id: input_boolean.washing_machine_busy
+      state: 'off'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.washing_machine_busy
+    # Set the washing machine in ready state and notify about completion
+  - alias: washing_machine_completed
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.washing_machine
+        below: 2
+    condition:
+      condition: state
+      entity_id: input_boolean.washing_machine_busy
+      state: 'on'
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.washing_machine_busy
+      - service: notify.notify
+        data:
+          message: 'The washing machine is done!'
+
+sensor:
+  - platform: template
+    sensors:
+      washing_machine:
+        friendly_name: 'Washing machine power usage'
+        value_template: '{{ states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state }}'
+        unit_of_measurement: W
+
+input_boolean:
+  washing_machine_busy:
+    name: Washing machine is busy
+    initial: off
+    icon: mdi:washing-machine
+
+group:
+  laundry:
+    name: Laundry
+    control: hidden
+    entities:
+      - input_boolean.washing_machine_busy
+      - sensor.washing_machine
+      - automation.washing_machine_started
+      - automation.washing_machine_completed
