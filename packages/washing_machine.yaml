@@ -17,9 +17,8 @@ automation:
   - id: washing_machine_started
     alias: 'Washing machine started'
     trigger:
-      - platform: numeric_state
-        entity_id: sensor.washing_machine
-        above: 5
+      - platform: template
+        value_template: '{{ states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state|float > 5 }}'
     condition:
       condition: state
       entity_id: input_boolean.washing_machine_busy
@@ -32,9 +31,8 @@ automation:
   - id: washing_machine_completed
     alias: 'Washing machine completed'
     trigger:
-      - platform: numeric_state
-        entity_id: sensor.washing_machine
-        below: 2
+      - platform: template
+        value_template: '{{ states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state|float < 2 }}'
     condition:
       condition: state
       entity_id: input_boolean.washing_machine_busy
@@ -45,14 +43,6 @@ automation:
       - service: notify.notify
         data:
           message: 'The washing machine is done!'
-
-sensor:
-  - platform: template
-    sensors:
-      washing_machine:
-        friendly_name: 'Washing machine power usage'
-        value_template: '{{ states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state }}'
-        unit_of_measurement: W
 
 input_boolean:
   washing_machine_busy:
@@ -66,6 +56,5 @@ group:
     control: hidden
     entities:
       - input_boolean.washing_machine_busy
-      - sensor.washing_machine
       - automation.washing_machine_started
       - automation.washing_machine_completed
