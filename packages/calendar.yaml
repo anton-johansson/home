@@ -1,0 +1,20 @@
+#
+# Handles calendar related information
+#
+
+homeassistant:
+  customize:
+    binary_sensor.workday_today:
+      hidden: true
+    binary_sensor.workday_tomorrow:
+      hidden: true
+
+binary_sensor:
+  - platform: workday
+    name: workday_today
+    country: SE
+    days_offset: 0
+  - platform: workday
+    name: workday_tomorrow
+    country: SE
+    days_offset: 1
