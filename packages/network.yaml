@@ -1,0 +1,35 @@
+#
+# Network
+#
+
+homeassistant:
+  customize_glob:
+    sensor.speedtest_download:
+      friendly_name: Download speed
+      icon: mdi:download
+    sensor.speedtest_upload:
+      friendly_name: Upload speed
+      icon: mdi:upload
+    sensor.speedtest_ping:
+      friendly_name: Ping
+      icon: mdi:timer
+
+group:
+  network:
+    name: Network
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+
+sensor:
+  - platform: speedtest
+    monitored_conditions:
+      - download
+      - upload
+      - ping
+    hours:
+      - 0
+      - 6
+      - 12
+      - 18

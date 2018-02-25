@@ -1,0 +1,13 @@
+#
+# Weataher
+#
+
+sensor:
+  - platform: yr
+
+group:
+  weather:
+    name: Weather
+    entities:
+      - sun.sun
+      - sensor.yr_symbol

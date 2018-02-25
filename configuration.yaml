@@ -5,6 +5,7 @@ homeassistant:
   elevation: !secret elevation
   unit_system: metric
   time_zone: Europe/Stockholm
+  packages: !include_dir_named packages
   customize: !include customize.yaml
 
 frontend:
@@ -42,7 +43,4 @@ tts:
 cloud:
 
 group: !include groups.yaml
-automation: !include automations/washing_machine.yaml
 script: !include scripts.yaml
-sensor: !include_dir_merge_list sensor
-input_boolean: !include input_boolean/triggers.yaml
