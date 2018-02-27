@@ -2,7 +2,7 @@ version: '3'
 
 services:
   home-assistant:
-    image: homeassistant/home-assistant:0.63.3
+    image: homeassistant/home-assistant:0.64.0
     container_name: home-assistant
     restart: always
     network_mode: host
