@@ -37,3 +37,6 @@ sensor.iphone_battery_state:
 sensor.iphone_battery_level:
   platform: ios
   unique_id: level_iPhone
+light.officelightstrip:
+  platform: deconz
+  unique_id: 00:17:88:01:02:9c:c2:44-0b

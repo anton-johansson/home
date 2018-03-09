@@ -1,15 +1,27 @@
 version: '3'
 
 services:
+
   home-assistant:
     image: homeassistant/home-assistant:0.64.0
     container_name: home-assistant
     restart: always
     network_mode: host
-    ports: 
-      - '8123:8123'
     volumes:
       - /home/$USER/projects/home-assistant-config:/config
       - /etc/localtime:/etc/localtime:ro
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
+
+  deconz:
+    image: marthoc/deconz:amd64-2.05.11
+    container_name: deconz
+    restart: always
+    network_mode: host
+    volumes:
+      - /home/$USER/projects/home-assistant-config/deCONZ:/root/.local/share/dresden-elektronik/deCONZ
+    devices:
+      - /dev/ttyUSB0
+    environment:
+      - DECONZ_WEB_PORT=8080
+      - DECONZ_WS_PORT=8443

@@ -15,6 +15,10 @@ config:
 http:
   api_password: !secret http_password
 
+light:
+  platform: hue
+  host: 127.0.0.1:8080
+
 updater:
 
 zwave:
