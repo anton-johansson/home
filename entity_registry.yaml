@@ -40,3 +40,6 @@ sensor.iphone_battery_level:
 light.officelightstrip:
   platform: deconz
   unique_id: 00:17:88:01:02:9c:c2:44-0b
+media_player.tv:
+  platform: cast
+  unique_id: c9e5ce57-7fb1-495b-a0b7-8d40debcfe76
