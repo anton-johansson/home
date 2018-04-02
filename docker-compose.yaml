@@ -8,7 +8,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - /home/$USER/projects/home-assistant-config:/config
+      - /home/anton/home-assistant-config:/config
       - /etc/localtime:/etc/localtime:ro
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
@@ -19,7 +19,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - /home/$USER/projects/home-assistant-config/deCONZ:/root/.local/share/dresden-elektronik/deCONZ
+      - /home/anton/home-assistant-config/deCONZ:/root/.local/share/dresden-elektronik/deCONZ
     devices:
       - /dev/ttyUSB0
     environment:
