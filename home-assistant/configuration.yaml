@@ -17,7 +17,7 @@ http:
 
 light:
   platform: hue
-  host: 127.0.0.1:8080
+  host: deconz:8080
 
 updater:
 

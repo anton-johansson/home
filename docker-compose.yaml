@@ -6,7 +6,6 @@ services:
     image: homeassistant/home-assistant:0.64.0
     container_name: home-assistant
     restart: always
-    network_mode: host
     volumes:
       - /home/anton/home/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -17,7 +16,6 @@ services:
     image: marthoc/deconz:amd64-2.05.11
     container_name: deconz
     restart: always
-    network_mode: host
     volumes:
       - /home/anton/home/deconz:/root/.local/share/dresden-elektronik/deCONZ
     devices:
@@ -25,3 +23,15 @@ services:
     environment:
       - DECONZ_WEB_PORT=8080
       - DECONZ_WS_PORT=8443
+
+  nginx:
+    image: nginx:1.13.11
+    container_name: nginx
+    restart: always
+    volumes:
+      - /home/anton/home/nginx/conf.d:/etc/nginx/conf.d
+      - /home/anton/home/nginx/certificates:/etc/letsencrypt
+      - /home/anton/home/nginx/letsencrypt:/data/letsencrypt
+    ports:
+      - 80:80
+      - 443:443
