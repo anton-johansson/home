@@ -8,10 +8,10 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - /home/anton/home-assistant-config:/config
+      - /home/anton/home/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
     devices:
-      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/ttyACM0
 
   deconz:
     image: marthoc/deconz:amd64-2.05.11
@@ -19,7 +19,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - /home/anton/home-assistant-config/deCONZ:/root/.local/share/dresden-elektronik/deCONZ
+      - /home/anton/home/deconz:/root/.local/share/dresden-elektronik/deCONZ
     devices:
       - /dev/ttyUSB0
     environment:

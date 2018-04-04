@@ -2,9 +2,9 @@ language: python
 python:
   - "3.4"
 install:
-  - HA_VERSION=$(cat .HA_VERSION)
+  - HA_VERSION=$(cat home-assistant/.HA_VERSION)
   - pip3 install "homeassistant==$HA_VERSION"
 script:
-  - hass -c . --script check_config
+  - hass -c home-assistant --script check_config
 before_install:
-  - cp travis-secrets.yaml secrets.yaml
+  - cp travis-secrets.yaml home-assistant/secrets.yaml
