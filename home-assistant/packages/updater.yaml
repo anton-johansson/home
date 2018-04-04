@@ -1,0 +1,13 @@
+#
+# Informs about new Home Assistant versions
+#
+
+automation:
+  - alias: notify_on_update_available
+    trigger:
+      platform: state
+      entity_id: updater.updater
+    action:
+      service: notify.ios
+      data_template:
+          message: "Version {{ states('updater.updater') }} for Home Assistant is available."
