@@ -28,8 +28,3 @@ sensor:
       - download
       - upload
       - ping
-    hours:
-      - 0
-      - 6
-      - 12
-      - 18
