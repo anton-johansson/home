@@ -43,4 +43,4 @@ automation:
       service: notify.notify
       data_template:
         title: "External IP address changed"
-        message: "The extenral IP address changed to {{ states.sensor.myipopendnscom.state }}."
+        message: "The external IP address changed to {{ states.sensor.myipopendnscom.state }}."
