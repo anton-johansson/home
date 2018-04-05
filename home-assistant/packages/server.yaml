@@ -29,15 +29,24 @@ sensor:
       since_last_boot_templated:
         value_template: >-
           {% set time = states.sensor.since_last_boot.state.split('.')[0] %}
+
+          {% set timeParts = time.split(',') %}
+          {% if timeParts | length == 2 %}
+            {% set output = timeParts[0] + ', ' %}
+            {% set time = timeParts[1] %}
+          {% elif timeParts | length == 1 %}
+            {% set output = '' %}
+            {% set time = timeParts[0] %}
+          {% endif %}
+
           {% set parts = time.split(':') %}
           {% set hours = parts[0] | int %}
           {% set minutes = parts[1] | int %}
 
-          {% set output = '' %}
           {% if hours == 1 %}
-            {% set output = '1 hour and ' %}
-          {% elif hours > 0 %}
-            {% set output = hours | string + ' hours and ' %}
+            {% set output = output + '1 hour and ' %}
+          {% else %}
+            {% set output = output + hours | string + ' hours and ' %}
           {% endif %}
 
           {% if minutes == 1 %}
