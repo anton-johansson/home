@@ -6,6 +6,9 @@ homeassistant:
   customize_glob:
     sensor.ssl_cert_home_assistant:
       friendly_name: !secret http_domain
+  customize:
+    automation.notify_when_home_assistant_ssl_cert_expires_soon:
+      hidden: true
 
 sensor:
   - platform: cert_expiry

@@ -15,6 +15,9 @@ homeassistant:
       icon: mdi:timer
     sensor.myipopendnscom:
       friendly_name: External IP address
+  customize:
+    automation.notify_when_external_address_changes:
+      hidden: true
 
 group:
   network:
