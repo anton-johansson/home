@@ -13,6 +13,8 @@ homeassistant:
     sensor.speedtest_ping:
       friendly_name: Ping
       icon: mdi:timer
+    sensor.myipopendnscom:
+      friendly_name: External IP address
 
 group:
   network:
@@ -21,6 +23,7 @@ group:
       - sensor.speedtest_download
       - sensor.speedtest_upload
       - sensor.speedtest_ping
+      - sensor.myipopendnscom
 
 sensor:
   - platform: speedtest
@@ -28,3 +31,16 @@ sensor:
       - download
       - upload
       - ping
+  - platform: dnsip
+    host: myip.opendns.com
+
+automation:
+  - alias: notify_when_external_address_changes
+    trigger:
+      platform: state
+      entity_id: sensor.myipopendnscom
+    action:
+      service: notify.notify
+      data_template:
+        title: "External IP address changed"
+        message: "The extenral IP address changed to {{ states.sensor.myipopendnscom.state }}."
