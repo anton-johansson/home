@@ -2,6 +2,11 @@
 # Informs about new Home Assistant versions
 #
 
+homeassistant:
+  customize:
+    automation.notify_on_update_available:
+      hidden: true
+
 automation:
   - alias: notify_on_update_available
     trigger:
