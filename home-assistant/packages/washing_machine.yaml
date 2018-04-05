@@ -27,7 +27,7 @@ automation:
       - service: input_boolean.turn_on
         entity_id: input_boolean.washing_machine_busy
 
-    # Set the washing machine in ready state and notify about completion
+  # Set the washing machine in ready state and notify about completion
   - id: washing_machine_completed
     alias: 'Washing machine completed'
     trigger:
