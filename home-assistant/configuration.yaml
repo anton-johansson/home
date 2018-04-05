@@ -14,6 +14,8 @@ config:
 
 http:
   api_password: !secret http_password
+  base_url: !secret http_url
+  use_x_forwarded_for: true
 
 light:
   platform: hue
