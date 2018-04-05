@@ -12,9 +12,9 @@ automation:
     trigger:
       platform: numeric_state
       entity_id: sensor.ssl_cert_home_assistant
-      below: 90
+      below: 30
     action:
-      service: notify.ios
+      service: notify.notify
       data_template:
         title: "SSL certificate expires soon"
         message: "Home Assistant SSL certificate expires in {{ states.sensor.ssl_cert_home_assistant.state }} days!"
