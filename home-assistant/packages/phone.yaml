@@ -11,6 +11,8 @@ homeassistant:
       friendly_name: Battery level
     sensor.iphone_battery_state:
       friendly_name: State
+    automation.notify_when_location_changes:
+      hidden: true
 
 group:
   phone:
@@ -19,3 +21,14 @@ group:
       - device_tracker.iphone
       - sensor.iphone_battery_level
       - sensor.iphone_battery_state
+
+automation:
+  - alias: notify_when_location_changes
+    trigger:
+      platform: state
+      entity_id: device_tracker.iphone
+    action:
+      service: notify.notify
+      data_template:
+        title: "Your location changed"
+        message: "Your location changed to '{{ states.device_tracker.iphone.state }}'."
