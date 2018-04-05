@@ -1,0 +1,20 @@
+#
+# Monitors SSL certificates to inform me about remaining days of validity.
+#
+
+sensor:
+  - platform: cert_expiry
+    host: !secret http_domain
+    name: ssl_cert_home_assistant
+
+automation:
+  - alias: notify_when_home_assistant_ssl_cert_expires_soon
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.ssl_cert_home_assistant
+      below: 90
+    action:
+      service: notify.ios
+      data_template:
+        title: "SSL certificate expires soon"
+        message: "Home Assistant SSL certificate expires in {{ states.sensor.ssl_cert_home_assistant.state }} days!"
