@@ -13,6 +13,7 @@ automation:
       platform: state
       entity_id: updater.updater
     action:
-      service: notify.ios
+      service: notify.notify
       data_template:
-          message: "Version {{ states('updater.updater') }} for Home Assistant is available."
+        title: "New Home Assistant version"
+        message: "Version {{ states.updater.updater.state }} for Home Assistant is available."
