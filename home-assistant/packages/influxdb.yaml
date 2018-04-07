@@ -1,0 +1,9 @@
+#
+# Connects Home Assistant to InfluxDB, which stores metrics that can be viewed in Grafana.
+#
+
+influxdb:
+  host: influxdb
+  include:
+    entities:
+      - sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power

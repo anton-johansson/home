@@ -35,3 +35,17 @@ services:
     ports:
       - 80:80
       - 443:443
+
+  influxdb:
+    image: influxdb:1.5.1
+    container_name: influxdb
+    restart: always
+    volumes:
+      - /home/anton/home/influxdb/data:/var/lib/influxdb
+
+  grafana:
+    image: grafana/grafana:5.0.4
+    container_name: grafana
+    restart: always
+    volumes:
+      - /home/anton/home/grafana/data:/var/lib/grafana
