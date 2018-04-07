@@ -21,8 +21,6 @@ light:
   platform: hue
   host: deconz:8080
 
-updater:
-
 zwave:
   usb_path: /dev/ttyACM0
 

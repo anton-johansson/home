@@ -1,0 +1,56 @@
+#
+# Informs about new Home Assistant versions
+#
+
+homeassistant:
+  customize:
+    sensor.version_current:
+      friendly_name: Current version
+      hidden: true
+    sensor.version_latest:
+      friendly_name: Latest version
+      hidden: true
+    binary_sensor.version_available:
+      hidden: true
+    automation.notify_when_update_is_available:
+      hidden: true
+
+sensor:
+  - platform: command_line
+    name: version_current
+    command: cat /config/.HA_VERSION
+    scan_interval: 3600
+
+  - platform: command_line
+    name: version_latest
+    command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+    scan_interval: 3600
+
+binary_sensor:
+  - platform: template
+    sensors:
+      version_available:
+        friendly_name: Update available
+        value_template: >-
+          {{ states.sensor.version_current.state != states.sensor.version_latest.state }}
+        icon_template: >-
+          {% if (states.sensor.version_current.state == states.sensor.version_latest.state) %}
+            mdi:approval
+          {% else %}
+            mdi:alert-box
+          {% endif %}
+
+automation:
+  - alias: notify_when_update_is_available
+    trigger:
+      platform: state
+      entity_id: sensor.version_latest
+    condition:
+      - condition: state
+        entity_id: binary_sensor.version_available
+        state: 'on'
+    action:
+      service: notify.notify
+      data_template:
+        title: "New Home Assistant version"
+        message: "Version {{ states.sensor.version_latest.state }} for Home Assistant is available."
