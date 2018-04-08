@@ -1,0 +1,3 @@
+sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power:
+  ignored: false
+  polling_intensity: 60
