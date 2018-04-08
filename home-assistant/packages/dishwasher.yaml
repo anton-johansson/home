@@ -16,6 +16,8 @@ homeassistant:
       friendly_name: Dishwasher power
       icon: mdi:flash
       hidden: false
+    switch.philio_technology_corporation_pan16_smart_energy_plug_in_switch_switch:
+      hidden: true
   customize_glob:
     sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch*:
       hidden: true
