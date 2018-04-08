@@ -1,0 +1,114 @@
+#
+# Provides information and notifications about the dishwasher.
+#
+
+homeassistant:
+  customize:
+    automation.dishwasher_started:
+      hidden: true
+    automation.dishwasher_drying:
+      hidden: true
+    automation.dishwasher_completed:
+      hidden: true
+    input_select.dishwasher_status:
+      hidden: true
+    sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power:
+      friendly_name: Dishwasher power
+      icon: mdi:flash
+      hidden: false
+  customize_glob:
+    sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch*:
+      hidden: true
+
+input_select:
+  dishwasher_status:
+    name: dishwasher_status
+    options:
+      - Idle
+      - Drying
+      - Running
+
+sensor:
+  - platform: template
+    sensors:
+      dishwasher_status:
+        value_template: "{{ states.input_select.dishwasher_status.state }}"
+        icon_template: mdi:beer
+        friendly_name: Dishwasher status
+
+automation:
+  # Set the dishwasher in running state when the power usage goes up and it is in idle state
+  - id: dishwasher_started
+    alias: Dishwasher started
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
+        above: 10
+    condition:
+      - condition: state
+        entity_id: input_select.dishwasher_status
+        state: Idle
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dishwasher_status
+          option: Running
+      - service: notify.notify
+        data:
+          title: Dishwasher started
+          message: The dishwasher has just started
+
+  # Set the dishwasher in drying state when power drops and it is in running state
+  - id: dishwasher_drying
+    alias: Dishwasher drying
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
+        below: 5
+    condition:
+      - condition: state
+        entity_id: input_select.dishwasher_status
+        state: Running
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dishwasher_status
+          option: Drying
+      - service: notify.notify
+        data:
+          title: Dishwasher drying
+          message: The dishwasher is currently drying the dishes
+
+  # Set dishwasher to idle state when power drops further and it is in drying state
+  - id: dishwasher_completed
+    alias: Dishwasher completed
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
+        below: 1
+        for:
+          minutes: 1
+    condition:
+      - condition: state
+        entity_id: input_select.dishwasher_status
+        state: Drying
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dishwasher_status
+          option: Idle
+      - service: notify.notify
+        data:
+          title: Dishwasher finnished
+          message: The dishwasher has finnished and is ready to be emptied
+
+group:
+  dishwasher:
+    name: Dishwasher
+    control: hidden
+    entities:
+      - sensor.dishwasher_status
+      - automation.dishwasher_started
+      - automation.dishwasher_drying
+      - automation.dishwasher_completed
+      - sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
