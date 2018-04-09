@@ -30,6 +30,7 @@ group:
 
 sensor:
   - platform: speedtest
+    server_id: !secret speedtest_server_id
     monitored_conditions:
       - download
       - upload
