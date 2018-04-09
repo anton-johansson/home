@@ -1,0 +1,9 @@
+#
+# Configures the Home Assistant Logbook
+#
+
+logbook:
+  exclude:
+    entities:
+      - sensor.since_last_boot_templated
+      - automation.download_graphs

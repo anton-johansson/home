@@ -23,7 +23,8 @@ group:
       - sensor.iphone_battery_state
 
 automation:
-  - alias: notify_when_location_changes
+  - id: notify_when_location_changes
+    alias: Notify when location changes
     trigger:
       platform: state
       entity_id: device_tracker.iphone

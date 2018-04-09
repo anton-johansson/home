@@ -35,8 +35,6 @@ history:
 recorder:
   purge_keep_days: 10
 
-logbook:
-
 map:
 
 sun:
