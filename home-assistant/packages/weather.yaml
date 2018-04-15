@@ -1,13 +1,48 @@
 #
-# Weather
+# Weather information
 #
+
+homeassistant:
+  customize:
+    sun.sun:
+      friendly_name: Sun location
+    sensor.weather:
+      friendly_name: Temperature
+    sensor.weather_cloudiness:
+      friendly_name: Cloudiness
+      icon: mdi:cloud
+    sensor.weather_wind_speed:
+      friendly_name: Wind speed
+      icon: mdi:weather-windy
+    sensor.weather_humidity:
+      friendly_name: Humidity
+      icon: mdi:water-percent
+    sensor.weather_temperature:
+      hidden: true
+    sensor.weather_symbol:
+      hidden: true
 
 sensor:
   - platform: yr
+    name: Weather
+    monitored_conditions:
+      - cloudiness
+      - humidity
+      - symbol
+      - temperature
+      - windSpeed
+  - platform: template
+    sensors:
+      weather:
+        value_template: "{{ states.sensor.weather_temperature.state }} {{ states.sensor.weather_temperature.attributes.unit_of_measurement }}"
+        entity_picture_template: "{{ states.sensor.weather_symbol.attributes.entity_picture }}"
 
 group:
   weather:
     name: Weather
     entities:
       - sun.sun
-      - sensor.yr_symbol
+      - sensor.weather
+      - sensor.weather_cloudiness
+      - sensor.weather_wind_speed
+      - sensor.weather_humidity
