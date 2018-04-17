@@ -67,6 +67,8 @@ automation:
       - platform: numeric_state
         entity_id: sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
         below: 5
+        for:
+          minutes: 1
     condition:
       - condition: state
         entity_id: input_select.dishwasher_status
