@@ -4,6 +4,7 @@ python:
 install:
   - HA_VERSION=$(cat home-assistant/.HA_VERSION)
   - pip3 install "homeassistant==$HA_VERSION"
+  - pip3 install "pycrypto"
 script:
   - hass -c home-assistant --script check_config
 before_install:
