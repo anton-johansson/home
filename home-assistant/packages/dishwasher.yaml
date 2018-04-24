@@ -12,10 +12,9 @@ homeassistant:
       hidden: true
     input_select.dishwasher_status:
       hidden: true
-    sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power:
+    sensor.dishwasher_power_usage:
       friendly_name: Dishwasher power
       icon: mdi:flash
-      hidden: false
     switch.philio_technology_corporation_pan16_smart_energy_plug_in_switch_switch:
       hidden: true
   customize_glob:
@@ -33,6 +32,14 @@ input_select:
 sensor:
   - platform: template
     sensors:
+      dishwasher_power_usage:
+        unit_of_measurement: 'W'
+        value_template: >-
+          {% if states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state|float < 5000 %}
+            {{ states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state }}
+          {% else %}
+            0
+          {% endif %}
       dishwasher_status:
         value_template: "{{ states.input_select.dishwasher_status.state }}"
         icon_template: mdi:beer
@@ -44,7 +51,7 @@ automation:
     alias: Dishwasher started
     trigger:
       - platform: numeric_state
-        entity_id: sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
+        entity_id: sensor.dishwasher_power_usage
         above: 10
     condition:
       - condition: state
@@ -65,7 +72,7 @@ automation:
     alias: Dishwasher drying
     trigger:
       - platform: numeric_state
-        entity_id: sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
+        entity_id: sensor.dishwasher_power_usage
         below: 5
         for:
           minutes: 1
@@ -88,7 +95,7 @@ automation:
     alias: Dishwasher completed
     trigger:
       - platform: numeric_state
-        entity_id: sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
+        entity_id: sensor.dishwasher_power_usage
         below: 1
         for:
           minutes: 1
@@ -115,4 +122,4 @@ group:
       - automation.dishwasher_started
       - automation.dishwasher_drying
       - automation.dishwasher_completed
-      - sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power
+      - sensor.dishwasher_power_usage
