@@ -30,11 +30,6 @@ discovery:
 
 conversation:
 
-history:
-
-recorder:
-  purge_keep_days: 10
-
 map:
 
 sun:

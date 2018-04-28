@@ -1,0 +1,14 @@
+#
+# Configures the history.
+#
+
+history:
+  exclude:
+    entities:
+      - sensor.since_last_boot_templated
+
+recorder:
+  purge_keep_days: 10
+  exclude:
+    entities:
+      - sensor.since_last_boot_templated
