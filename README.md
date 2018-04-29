@@ -10,10 +10,3 @@ The configuration for my home tools, such as Home Assistant.
 ```shell
 $ docker-compose start
 ```
-
-
-## Checking Home Assistant configuration
-
-```shell
-$ docker exec -it home-assistant python -m homeassistant --config /config --script check_config
-```
