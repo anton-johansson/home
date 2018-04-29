@@ -14,8 +14,3 @@ $ sudo docker run -it --rm \
       --webroot --webroot-path=/data/letsencrypt \
       -d home.anton-johansson.com
 ```
-
-
-## Accessing deCONZ
-
-The deCONZ instance is exposed through nginx because it's hidden within the Docker network, but there is no domain configured for it. Route `deconz.anton-johansson.com` to the home server through the `hosts` file in order to access deCONZ.
