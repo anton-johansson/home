@@ -34,8 +34,9 @@ sensor:
   - platform: template
     sensors:
       weather:
-        value_template: "{{ states.sensor.weather_temperature.state }} {{ states.sensor.weather_temperature.attributes.unit_of_measurement }}"
+        value_template: "{{ states.sensor.weather_temperature.state }}"
         entity_picture_template: "{{ states.sensor.weather_symbol.attributes.entity_picture }}"
+        unit_of_measurement: "°C"
 
 group:
   weather:
