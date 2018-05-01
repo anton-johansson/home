@@ -1,0 +1,21 @@
+#
+# Provides security related automations
+#
+
+automation:
+  - id: notify_on_bad_logins
+    alias: Send notification when a failed login attempt occur
+    trigger:
+      - platform: state
+        entity_id: persistent_notification.httplogin
+    condition:
+      - condition: template
+        value_template: "{{ states('persistent_notification.httplogin') != 'unknown' }}"
+    action:
+      - service: notify.notify
+        data:
+          title: "Failed Home Assistant login attempt!"
+          message: "{{ states.persistent_notification.httplogin.attributes.message }}"
+      - service: persistent_notification.dismiss
+        data:
+          notification_id: httplogin
