@@ -53,6 +53,8 @@ automation:
       - platform: numeric_state
         entity_id: sensor.dishwasher_power_usage
         above: 10
+        for:
+          minutes: 1
     condition:
       - condition: state
         entity_id: input_select.dishwasher_status
