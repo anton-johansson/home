@@ -2,9 +2,9 @@
 # Controls the Philips TV
 #
 
-media_player:
-  - platform: philips_tv_2016
-    name: TV
-    host: !secret tv_hostname
-    username: !secret tv_username
-    password: !secret tv_password
+#media_player:
+#  - platform: philips_tv_2016
+#    name: TV
+#    host: !secret tv_hostname
+#    username: !secret tv_username
+#    password: !secret tv_password
