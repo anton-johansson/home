@@ -2,6 +2,11 @@
 # Provides security related automations
 #
 
+homeassistant:
+  customize:
+    automation.send_notification_when_a_failed_login_attempt_occur:
+      hidden: true
+
 automation:
   - id: notify_on_bad_logins
     alias: Send notification when a failed login attempt occur
