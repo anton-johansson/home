@@ -22,7 +22,7 @@ light:
   host: deconz:8080
 
 zwave:
-  usb_path: /dev/ttyACM0
+  usb_path: /dev/zwave
 
 ios:
 
