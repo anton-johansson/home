@@ -8,3 +8,7 @@
 #    host: !secret tv_hostname
 #    username: !secret tv_username
 #    password: !secret tv_password
+
+media_player:
+  - platform: cast
+    host: !secret chromecast_hostname
