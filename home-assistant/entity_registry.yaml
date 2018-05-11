@@ -43,3 +43,6 @@ light.officelightstrip:
 media_player.tv:
   platform: cast
   unique_id: e5031e5b-f245-484d-7425-049dc0dea134
+media_player.living_room:
+  platform: sonos
+  unique_id: RINCON_7828CA56C93901400

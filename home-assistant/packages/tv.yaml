@@ -12,3 +12,6 @@
 media_player:
   - platform: cast
     host: !secret chromecast_hostname
+  - platform: sonos
+    hosts:
+      - !secret sonos_playbar_hostname
