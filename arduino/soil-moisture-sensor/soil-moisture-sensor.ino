@@ -15,8 +15,7 @@ void loop() {
   digitalWrite(BUILTIN_LED, LOW);
 }
 
-void output(int sensorValue)
-{
+void output(int sensorValue) {
   String output = "Value is ";
   output = output + sensorValue;
   output = output + " / ";
