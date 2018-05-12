@@ -28,7 +28,7 @@ automation:
 camera:
   - platform: local_file
     name: grafana_power_consumption
-    file_path: /home/.homeassistant/downloads/power-consumption.png
+    file_path: /config/downloads/power-consumption.png
 
 shell_command:
   download_graph: /config/bash/download-graph.sh "{{ key }}" "{{ dashboard }}" "{{ panel }}" "{{ file }}"
