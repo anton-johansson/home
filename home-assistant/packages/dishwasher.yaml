@@ -112,8 +112,14 @@ automation:
           option: Idle
       - service: notify.notify
         data:
-          title: Dishwasher finnished
-          message: The dishwasher has finnished and is ready to be emptied
+          title: Dishwasher finished
+          message: The dishwasher has finished and is ready to be emptied
+      - service: script.sonos_say
+        data:
+          entity_id: media_player.living_room
+          volume: 0.3
+          message: The dishwasher has finished and is ready to be emptied
+          delay: 00:00:04
 
 group:
   dishwasher:

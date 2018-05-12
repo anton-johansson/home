@@ -15,3 +15,26 @@ media_player:
   - platform: sonos
     hosts:
       - !secret sonos_playbar_hostname
+
+script:
+  sonos_say:
+    alias: "Sonos TTS script"
+    sequence:
+     - service: media_player.sonos_snapshot
+       data_template:
+         entity_id: "{{ entity_id }}"
+     - service: media_player.sonos_unjoin
+       data_template:
+         entity_id: "{{ entity_id }}"
+     - service: media_player.volume_set
+       data_template:
+         entity_id: "{{ entity_id }}"
+         volume_level: "{{ volume }}"
+     - service: tts.google_say
+       data_template:
+         entity_id: "{{ entity_id }}"
+         message: "{{ message }}"
+     - delay: "{{ delay }}"
+     - service: media_player.sonos_restore
+       data_template:
+         entity_id: "{{ entity_id }}"
