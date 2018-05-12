@@ -2,6 +2,11 @@
 # Controls the Philips TV and related components
 #
 
+homeassistant:
+  customize:
+    script.sonos_say:
+      hidden: true
+
 #media_player:
 #  - platform: philips_tv_2016
 #    name: TV
