@@ -1,6 +1,6 @@
 # Arduino
 
-Contains source code and setups for the Arduino units
+Contains source code and setups for the Arduino units.
 
 
 ## Units
