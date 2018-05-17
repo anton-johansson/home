@@ -17,10 +17,6 @@ http:
   base_url: !secret http_url
   use_x_forwarded_for: true
 
-light:
-  platform: hue
-  host: deconz:8080
-
 zwave:
   usb_path: /dev/zwave
 

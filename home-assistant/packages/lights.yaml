@@ -1,0 +1,7 @@
+#
+# Configures all the lights of the home.
+#
+
+deconz:
+  host: deconz
+  port: 8080
