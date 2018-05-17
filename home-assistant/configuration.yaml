@@ -22,8 +22,6 @@ zwave:
 
 ios:
 
-discovery:
-
 conversation:
 
 map:
