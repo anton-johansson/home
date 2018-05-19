@@ -1,0 +1,25 @@
+{
+    "@timestamp": "2018-05-27T12:48:57.000Z",
+    "@version": "1",
+    "docker": {
+        "hostname": "74ab19cd30b4",
+        "id": "74ab19cd30b403e00d6634d9951224e83305208a22f12911de6cabbbd5997d32",
+        "image": "nginx:1.13.11",
+        "labels": null,
+        "name": "nginx"
+    },
+    "host": "localhost",
+    "message": "Requested /service_worker.js (200)",
+    "nginx": {
+        "agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36",
+        "bytes": "10036",
+        "clientip": "192.168.1.1",
+        "http_version": "1.1",
+        "method": "GET",
+        "referrer": "https://my-home-assistant.com/service_worker.js",
+        "resource": "/service_worker.js",
+        "response_code": "200",
+        "username": "-"
+    }
+}
+

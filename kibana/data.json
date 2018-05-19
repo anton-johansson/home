@@ -1,0 +1,81 @@
+[
+  {
+    "_id": "80b854b0-61bc-11e8-b063-c19beded7cc6",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Application logs",
+      "hits": 0,
+      "description": "Shows all application logs.",
+      "panelsJSON": "[{\"panelIndex\":\"1\",\"gridData\":{\"x\":0,\"y\":3,\"w\":6,\"h\":7,\"i\":\"1\"},\"embeddableConfig\":{\"spy\":null,\"vis\":{\"colors\":{\"INFO\":\"#447EBC\",\"UNKNOWN\":\"#2F575E\",\"home-assistant\":\"#64B0C8\"},\"legendOpen\":true}},\"id\":\"c3887a00-61bb-11e8-b063-c19beded7cc6\",\"type\":\"visualization\",\"version\":\"6.2.4\"},{\"panelIndex\":\"2\",\"gridData\":{\"x\":0,\"y\":0,\"w\":12,\"h\":3,\"i\":\"2\"},\"id\":\"80cbf1d0-61be-11e8-b063-c19beded7cc6\",\"type\":\"visualization\",\"version\":\"6.2.4\"},{\"panelIndex\":\"3\",\"gridData\":{\"x\":6,\"y\":3,\"w\":6,\"h\":7,\"i\":\"3\"},\"version\":\"6.2.4\",\"type\":\"search\",\"id\":\"3a34a070-61c1-11e8-b063-c19beded7cc6\"}]",
+      "optionsJSON": "{\"darkTheme\":false,\"hidePanelTitles\":false,\"useMargins\":true}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"language\":\"lucene\",\"query\":\"\"},\"filter\":[],\"highlightAll\":true,\"version\":true}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "3a34a070-61c1-11e8-b063-c19beded7cc6",
+    "_type": "search",
+    "_source": {
+      "title": "Logs",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "docker.name",
+        "severity",
+        "name",
+        "message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logs\",\"highlightAll\":true,\"version\":true,\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filter\":[]}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "80cbf1d0-61be-11e8-b063-c19beded7cc6",
+    "_type": "visualization",
+    "_source": {
+      "title": "Severity timeline",
+      "visState": "{\"title\":\"Severity timeline\",\"type\":\"timelion\",\"params\":{\"expression\":\".elasticsearch(q=severity:INFO).label(\\\"Information\\\").color(\\\"#61afe2\\\"),\\n.elasticsearch(q=severity:WARN).label(\\\"Warning\\\").color(\\\"#e2d761\\\"),\\n.elasticsearch(q=severity:ERROR).label(\\\"Error\\\").color(\\\"#e26161\\\")\",\"interval\":\"auto\"},\"aggs\":[]}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
+    "_id": "c3887a00-61bb-11e8-b063-c19beded7cc6",
+    "_type": "visualization",
+    "_source": {
+      "title": "Severity per application",
+      "visState": "{\"title\":\"Severity per application\",\"type\":\"pie\",\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":false,\"labels\":{\"show\":true,\"values\":true,\"last_level\":true,\"truncate\":100}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"severity.keyword\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":true,\"missingBucketLabel\":\"UNKNOWN\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Severity\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"docker.name.keyword\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Application\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"UNKNOWN\":\"#2F575E\",\"home-assistant\":\"#64B0C8\",\"INFO\":\"#447EBC\"},\"legendOpen\":true}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logs\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  }
+]

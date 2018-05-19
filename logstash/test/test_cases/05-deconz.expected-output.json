@@ -1,0 +1,15 @@
+{
+  "@timestamp": "2018-05-31T22:17:23.662Z",
+  "@version": "1",
+  "docker": {
+    "hostname": "b0b40bf9d7fe",
+    "id": "b0b40bf9d7fead1f2aa644dc248afbd28a9c71389ca0b2ad85e9f224065cc379",
+    "image": "marthoc/deconz:amd64-2.05.11",
+    "labels": null,
+    "name": "deconz"
+  },
+  "host": "localhost",
+  "severity": "INFO",
+  "message": "GW firmware version: 0x260b0500",
+  "stream": "stdout"
+}
