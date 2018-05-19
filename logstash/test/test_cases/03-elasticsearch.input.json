@@ -1,0 +1,13 @@
+{
+  "@timestamp": "2018-05-27T09:26:52.189Z",
+  "@version": "1",
+  "docker": {
+    "image" : "docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4",
+    "labels" : null,
+    "name" : "/elasticsearch",
+    "id" : "74ab19cd30b403e00d6634d9951224e83305208a22f12911de6cabbbd5997d32",
+    "hostname" : "74ab19cd30b4"
+  },
+  "message": "[2018-05-27T15:59:42,151][INFO ][o.e.c.m.MetaDataMappingService] [Be04vHi] [logstash-2018.05.27/lw6MhmS2TKWTzDZpSSGwyQ] update_mapping [doc]",
+  "host": "localhost"
+}

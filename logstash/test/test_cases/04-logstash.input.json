@@ -1,0 +1,13 @@
+{
+  "@timestamp": "2018-05-27T09:26:52.189Z",
+  "@version": "1",
+  "docker": {
+    "image" : "docker.elastic.co/logstash/logstash-oss:6.2.4",
+    "labels" : null,
+    "name" : "/logstash",
+    "id" : "74ab19cd30b403e00d6634d9951224e83305208a22f12911de6cabbbd5997d32",
+    "hostname" : "74ab19cd30b4"
+  },
+  "message": "[2018-05-28T18:10:56,460][INFO ][logstash.outputs.elasticsearch] Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>\"/\"}",
+  "host": "localhost"
+}

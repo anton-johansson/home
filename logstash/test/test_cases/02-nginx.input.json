@@ -1,0 +1,13 @@
+{
+  "@timestamp": "2018-05-27T09:26:52.189Z",
+  "@version": "1",
+  "docker": {
+    "image" : "nginx:1.13.11",
+    "labels" : null,
+    "name" : "/nginx",
+    "id" : "74ab19cd30b403e00d6634d9951224e83305208a22f12911de6cabbbd5997d32",
+    "hostname" : "74ab19cd30b4"
+  },
+  "message": "192.168.1.1 - - [27/May/2018:12:48:57 +0000] \"GET /service_worker.js HTTP/1.1\" 200 10036 \"https://my-home-assistant.com/service_worker.js\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36\" \"-\"",
+  "host": "localhost"
+}
