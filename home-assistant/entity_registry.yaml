@@ -46,3 +46,6 @@ media_player.tv:
 media_player.living_room:
   platform: sonos
   unique_id: RINCON_7828CA56C93901400
+media_player.kitchen:
+  platform: sonos
+  unique_id: RINCON_7828CA13C2EE01400
