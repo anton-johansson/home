@@ -10,7 +10,7 @@ services:
       - /home/anton/home/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
     devices:
-      - /dev/ttyACM1:/dev/zwave
+      - /dev/ttyACM0:/dev/zwave
 
   deconz:
     image: marthoc/deconz:amd64-2.05.11
