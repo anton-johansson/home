@@ -12,4 +12,4 @@ script:
   - hass -c home-assistant --script check_config
   - logstash/test/run.sh
 before_install:
-  - cp travis-secrets.yaml home-assistant/secrets.yaml
+  - cp home-assistant/.travis-secrets.yaml home-assistant/secrets.yaml
