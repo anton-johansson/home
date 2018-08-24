@@ -1,9 +1,0 @@
-#
-# Connects Home Assistant to InfluxDB, which stores metrics that can be viewed in Grafana.
-#
-
-influxdb:
-  host: influxdb
-  include:
-    entities:
-      - sensor.dishwasher_power_usage
