@@ -24,6 +24,14 @@ services:
       - DECONZ_WEB_PORT=8080
       - DECONZ_WS_PORT=8443
 
+  portainer:
+    image: portainer/portainer:1.19.1
+    container_name: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/anton/home/portainer/data:/data
+
   nginx:
     image: nginx:1.13.11
     container_name: nginx
