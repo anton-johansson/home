@@ -9,6 +9,11 @@ homeassistant:
     binary_sensor.workday_tomorrow:
       hidden: true
 
+google:
+  client_id: !secret google_calendar_client_id
+  client_secret: !secret google_calendar_shared_secret
+  track_new_calendar: false
+
 binary_sensor:
   - platform: workday
     name: workday_today
