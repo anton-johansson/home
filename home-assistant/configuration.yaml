@@ -33,6 +33,12 @@ tts:
 
 cloud:
 
+panel_iframe:
+  application_logs:
+    title: Application logs
+    icon: mdi:information
+    url: https://kibana.anton-johansson.com/app/kibana#/dashboards?title=Application logs&embed
+
 group: !include groups.yaml
 script: !include scripts.yaml
 zone: !include zones.yaml
