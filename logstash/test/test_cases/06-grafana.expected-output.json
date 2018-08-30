@@ -12,5 +12,6 @@
   "message": "Rendering",
   "name": "png-renderer",
   "severity": "INFO",
-  "stream": "stdout"
+  "stream": "stdout",
+  "type": "application"
 }

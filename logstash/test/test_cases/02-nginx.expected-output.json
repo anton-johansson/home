@@ -20,6 +20,7 @@
         "resource": "/service_worker.js",
         "response_code": "200",
         "username": "-"
-    }
+    },
+    "type": "request"
 }
 

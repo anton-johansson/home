@@ -15,5 +15,6 @@
   "host": "localhost",
   "message": "update_mapping [doc]",
   "name": "o.e.c.m.MetaDataMappingService",
-  "severity": "INFO"
+  "severity": "INFO",
+  "type": "application"
 }

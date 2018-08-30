@@ -11,5 +11,6 @@
   "host": "localhost",
   "severity": "INFO",
   "message": "GW firmware version: 0x260b0500",
-  "stream": "stdout"
+  "stream": "stdout",
+  "type": "application"
 }

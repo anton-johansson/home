@@ -12,5 +12,6 @@
   "message": "Bus:Handling <Event state_changed[L]: entity_id=sensor.processor_use, old_state=<state sensor.processor_use=12; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:21.267940+02:00>, new_state=<state sensor.processor_use=22; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:52.274195+02:00>>",
   "thread": "MainThread",
   "severity": "INFO",
-  "name": "homeassistant.core"
+  "name": "homeassistant.core",
+  "type": "application"
 }

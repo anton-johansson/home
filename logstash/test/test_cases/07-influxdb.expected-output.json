@@ -12,5 +12,6 @@
   "original": "ts=2018-06-01T17:25:02.257677Z lvl=info msg=\"Executing query\" log_id=08M9R63l000 service=query query=\"SELECT distinct(value) FROM home_assistant.autogen.W WHERE (entity_id = 'dishwasher_power_usage') AND time >= now() - 12h GROUP BY time(2m) fill(none)\"",
   "message": "Executing query",
   "severity": "INFO",
-  "stream": "stderr"
+  "stream": "stderr",
+  "type": "application"
 }

@@ -11,5 +11,6 @@
   "host": "localhost",
   "message": "Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>\"/\"}",
   "name": "logstash.outputs.elasticsearch",
-  "severity": "INFO"
+  "severity": "INFO",
+  "type": "application"
 }
