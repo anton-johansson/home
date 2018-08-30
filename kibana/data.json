@@ -19,7 +19,8 @@
         "value": 0
       },
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"query\":{\"language\":\"lucene\",\"query\":\"\"},\"filter\":[],\"highlightAll\":true,\"version\":true}"
+        "searchSourceJSON": 
+"{\"query\":{\"language\":\"lucene\",\"query\":\"\"},\"filter\":[{\"meta\":{\"negate\":true,\"index\":\"logs\",\"type\":\"phrase\",\"key\":\"type\",\"value\":\"request\",\"params\":{\"query\":\"request\",\"type\":\"phrase\"},\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"type\":{\"query\":\"request\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"highlightAll\":true,\"version\":true}"
       }
     },
     "_meta": {
