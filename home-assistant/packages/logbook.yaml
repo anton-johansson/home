@@ -6,3 +6,5 @@ logbook:
   exclude:
     entities:
       - sensor.since_last_boot_templated
+      - calendar.work
+      - calendar.personal
