@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EventGhost Version="1722" Guid="{D7532279-DA90-423C-AA81-8B2361D51A6E}" Time="1539385911.57">
+    <Autostart Name="Autostart" Expanded="True">
+        <Plugin Identifier="Task" Guid="{D1748551-C605-4423-B392-FB77E6842437}" File="Task">
+            gAIpLg==
+        </Plugin>
+    </Autostart>
+    <Macro Name="Start Overwatch">
+        <Event Name="Task.Activated.Overwatch" />
+        <Action Name="Update HA">
+            EventGhost.PythonScript(u'import requests\nurl = \'https://{home-assistant-domain}/api/states/computer_activity.gaming_pc?api_password={api-password}\'\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": "overwatch"}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+        </Action>
+    </Macro>
+    <Macro Name="Stop Overwatch">
+        <Event Name="Task.Deactivated.Overwatch" />
+        <Action Name="Update HA">
+            EventGhost.PythonScript(u'import requests\nurl = \'https://{home-assistant-domain}/api/states/computer_activity.gaming_pc?api_password={api-password}\'\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+        </Action>
+    </Macro>
+    <Macro Name="Lock Windows">
+        <Event Name="Task.Activated.LockApp" />
+        <Action Name="Update HA">
+            EventGhost.PythonScript(u'import requests\nurl = \'https://{home-assistant-domain}/api/states/computer_activity.gaming_pc?api_password={api-password}\'\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": false, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+        </Action>
+    </Macro>
+    <Macro Name="Unlock Windows">
+        <Event Name="Task.Deactivated.LockApp" />
+        <Action Name="Update HA">
+            EventGhost.PythonScript(u'import requests\nurl = \'https://{home-assistant-domain}/api/states/computer_activity.gaming_pc?api_password={api-password}\'\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+        </Action>
+    </Macro>
+</EventGhost>
