@@ -1,0 +1,73 @@
+#
+# Handles computer activity.
+#
+
+homeassistant:
+  customize:
+    automation.turn_on_office_lightstrip:
+      hidden: true
+    automation.turn_off_office_lightstrip:
+      hidden: true
+    binary_sensor.gaming_pc_activity:
+      hidden: true
+    binary_sensor.gaming_pc_overwatch:
+      hidden: true
+
+binary_sensor:
+  - platform: template
+    sensors:
+      gaming_pc_activity:
+        value_template: '{{ states.computer_activity.gaming_pc.state }}'
+      gaming_pc_overwatch:
+        value_template: '{{ states.computer_activity.gaming_pc.attributes.focus == "overwatch" }}'
+
+sensor:
+  - platform: template
+    sensors:
+      gaming_pc_status:
+        value_template: >-
+          {% if is_state('binary_sensor.gaming_pc_activity', 'on') %}
+            {% if is_state('binary_sensor.gaming_pc_overwatch', 'on') %}
+              Playing Overwatch
+            {% else %}
+              Active
+            {% endif %}
+          {% else %}
+            Idle
+          {% endif %}
+        icon_template: mdi:gamepad-variant
+        friendly_name: Gaming PC
+
+group:
+  computer_activity:
+    name: Computer activity
+    entities:
+      - sensor.gaming_pc_status
+
+automation:
+  - id: turn_on_office_lightstrip
+    alias: Turn on office lightstrip
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.gaming_pc_activity
+    condition:
+      - condition: state
+        entity_id: binary_sensor.gaming_pc_activity
+        state: 'on'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.officelightstrip
+  - id: turn_off_office_lightstrip
+    alias: Turn off office lightstrip
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.gaming_pc_activity
+    condition:
+      - condition: state
+        entity_id: binary_sensor.gaming_pc_activity
+        state: 'off'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.officelightstrip
