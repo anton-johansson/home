@@ -3,6 +3,10 @@ version: '3.4'
 networks:
   traefik-net:
     driver: bridge
+  elasticsearch-net:
+    driver: bridge
+  logstash-net:
+    driver: bridge
 
 services:
 
@@ -106,6 +110,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
     container_name: elasticsearch
     networks:
+      - elasticsearch-net
       - traefik-net
     environment:
       - cluster.name=anton-johansson
@@ -128,6 +133,9 @@ services:
   logstash:
     image: docker.elastic.co/logstash/logstash-oss:6.2.4
     container_name: logstash
+    networks:
+      - elasticsearch-net
+      - logstash-net
     environment:
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
     restart: always
@@ -142,6 +150,7 @@ services:
     image: docker.elastic.co/kibana/kibana-oss:6.2.4
     container_name: kibana
     networks:
+      - elasticsearch-net
       - traefik-net
     volumes:
       - /home/anton/home/kibana/config:/usr/share/kibana/config:ro
@@ -159,6 +168,8 @@ services:
     build:
       context: logspout
     container_name: logspout
+    networks:
+      - logstash-net
     environment:
       - ROUTE_URIS=logstash://logstash:5000
     restart: on-failure
