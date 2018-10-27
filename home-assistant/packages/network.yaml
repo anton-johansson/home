@@ -44,7 +44,16 @@ automation:
       platform: state
       entity_id: sensor.myipopendnscom
     action:
-      service: notify.notify
-      data_template:
-        title: "External IP address changed"
-        message: "The external IP address changed to {{ states.sensor.myipopendnscom.state }}."
+      - service: notify.notify
+        data_template:
+          title: "External IP address changed"
+          message: "The external IP address changed to {{ states.sensor.myipopendnscom.state }}. DNS records has been updated."
+      - service: shell_command.update_dns_record
+        data_template:
+          username: !secret loopia_username
+          password: !secret loopia_password
+          domain: !secret loopia_domain
+          address: "{{ states.sensor.myipopendnscom.state }}"
+
+shell_command:
+  update_dns_record: '/config/scripts/update-dns-record.py "{{ username }}" "{{ password }}" "{{ domain }}" "{{ address }}"'
