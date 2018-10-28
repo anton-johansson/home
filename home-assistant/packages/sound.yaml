@@ -7,8 +7,8 @@ homeassistant:
     script.sonos_say:
       hidden: true
 
-media_player:
-  - platform: sonos
+sonos:
+  media_player:
     hosts:
       - !secret sonos_playbar_hostname
       - !secret sonos_kitchen_hostname

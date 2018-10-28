@@ -55,7 +55,7 @@ services:
       - "--logLevel=INFO"
 
   home-assistant:
-    image: homeassistant/home-assistant:0.64.0
+    image: homeassistant/home-assistant:0.81.0
     container_name: home-assistant
     networks:
       - traefik-net

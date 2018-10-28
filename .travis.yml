@@ -1,15 +1,8 @@
 sudo: required
-language: python
 services:
   - docker
-python:
-  - "3.4"
-install:
-  - HA_VERSION=$(cat home-assistant/.HA_VERSION)
-  - pip3 install "homeassistant==$HA_VERSION"
-  - pip3 install "pycrypto"
 script:
-  - hass -c home-assistant --script check_config
+  - home-assistant/test.sh
   - logstash/test/run.sh
 before_install:
   - cp home-assistant/.travis-secrets.yaml home-assistant/secrets.yaml

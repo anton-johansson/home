@@ -8,6 +8,6 @@
     "id" : "74ab19cd30b403e00d6634d9951224e83305208a22f12911de6cabbbd5997d32",
     "hostname" : "74ab19cd30b4"
   },
-  "message": "\u001B[32m2018-05-27 11:26:52 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sensor.processor_use, old_state=<state sensor.processor_use=12; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:21.267940+02:00>, new_state=<state sensor.processor_use=22; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:52.274195+02:00>>\u001B[0m",
+  "message": "2018-05-27 11:26:52 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sensor.processor_use, old_state=<state sensor.processor_use=12; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:21.267940+02:00>, new_state=<state sensor.processor_use=22; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:52.274195+02:00>>",
   "host": "localhost"
 }

@@ -13,10 +13,10 @@ homeassistant:
     sensor.speedtest_ping:
       friendly_name: Ping
       icon: mdi:timer
-    sensor.myipopendnscom:
+    sensor.external_ip_address:
       friendly_name: External IP address
   customize:
-    automation.notify_when_external_address_changes:
+    automation.external_ip_address_changes:
       hidden: true
 
 group:
@@ -26,7 +26,7 @@ group:
       - sensor.speedtest_download
       - sensor.speedtest_upload
       - sensor.speedtest_ping
-      - sensor.myipopendnscom
+      - sensor.external_ip_address
 
 sensor:
   - platform: speedtest
@@ -36,24 +36,25 @@ sensor:
       - upload
       - ping
   - platform: dnsip
+    name: external_ip_address
     host: myip.opendns.com
 
 automation:
-  - alias: notify_when_external_address_changes
+  - alias: external_ip_address_changes
     trigger:
       platform: state
-      entity_id: sensor.myipopendnscom
+      entity_id: sensor.external_ip_address
     action:
       - service: notify.notify
         data_template:
           title: "External IP address changed"
-          message: "The external IP address changed to {{ states.sensor.myipopendnscom.state }}. DNS records has been updated."
+          message: "The external IP address changed to {{ states.sensor.external_ip_address.state }}. DNS records has been updated."
       - service: shell_command.update_dns_record
         data_template:
           username: !secret loopia_username
           password: !secret loopia_password
           domain: !secret loopia_domain
-          address: "{{ states.sensor.myipopendnscom.state }}"
+          address: "{{ states.sensor.external_ip_address.state }}"
 
 shell_command:
   update_dns_record: '/config/scripts/update-dns-record.py "{{ username }}" "{{ password }}" "{{ domain }}" "{{ address }}"'
