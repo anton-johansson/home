@@ -30,7 +30,7 @@ services:
       traefik.enable: "true"
       traefik.port: 8080
       traefik.frontend.rule: "Host:traefik.anton-johansson.com"
-      traefik.frontend.entryPoints: "http"
+      traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
     command:
       - "--entryPoints=Name:http Address::80"
@@ -88,7 +88,7 @@ services:
       traefik.enable: "true"
       traefik.port: 8080
       traefik.frontend.rule: "Host:deconz.anton-johansson.com"
-      traefik.frontend.entryPoints: "http"
+      traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
   portainer:
@@ -127,7 +127,7 @@ services:
       traefik.enable: "true"
       traefik.port: 9200
       traefik.frontend.rule: "Host:elasticsearch.anton-johansson.com"
-      traefik.frontend.entryPoints: "http"
+      traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
   logstash:
@@ -161,7 +161,7 @@ services:
       traefik.enable: "true"
       traefik.port: 5601
       traefik.frontend.rule: "Host:kibana.anton-johansson.com"
-      traefik.frontend.entryPoints: "http"
+      traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
   logspout:
