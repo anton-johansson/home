@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<EventGhost Version="1722" Guid="{56BABCCD-373E-462D-92F8-E696DFD2E237}" Time="1539535620.32">
-    <Autostart Name="Autostart" Expanded="True">
+<EventGhost Version="1722" Guid="{13730AC3-1E50-4877-BE08-567B3E8B9E2F}" Time="1541185107.43">
+    <Autostart Name="Autostart">
         <Plugin Identifier="Task" Guid="{D1748551-C605-4423-B392-FB77E6842437}" File="Task">
             gAIpLg==
         </Plugin>
@@ -11,25 +11,25 @@
     <Macro Name="Start Overwatch">
         <Event Name="Task.Activated.Overwatch" />
         <Action Name="Update HA">
-            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": "overwatch"}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": "overwatch"}}\'\nresponse = requests.post(url, data, headers=headers, verify=False)\nprint(response.text)')
         </Action>
     </Macro>
     <Macro Name="Stop Overwatch">
         <Event Name="Task.Deactivated.Overwatch" />
         <Action Name="Update HA">
-            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers, verify=False)\nprint(response.text)')
         </Action>
     </Macro>
-    <Macro Name="Lock Windows" Expanded="True">
+    <Macro Name="Lock/Idle Windows">
         <Event Name="Task.Activated.LockApp" />
         <Action Name="Update HA">
-            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": false, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": false, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers, verify=False)\nprint(response.text)')
         </Action>
     </Macro>
-    <Macro Name="Unlock Windows">
+    <Macro Name="Unlock/Unldle Windows">
         <Event Name="Task.Deactivated.LockApp" />
         <Action Name="Update HA">
-            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers)\nprint(response.text)')
+            EventGhost.PythonScript(u'import requests\n\nhomeAssistantURL = getattr(eg.globals, "homeAssistantURL")\nhomeAssistantPassword = getattr(eg.globals, "homeAssistantPassword")\n\nurl = homeAssistantURL + "/api/states/computer_activity.gaming_pc?api_password=" + homeAssistantPassword\nheaders = {\'content-type\': \'application/json\'}\ndata = \'{"state": true, "attributes": {"hidden": true, "focus": ""}}\'\nresponse = requests.post(url, data, headers=headers, verify=False)\nprint(response.text)')
         </Action>
     </Macro>
 </EventGhost>
