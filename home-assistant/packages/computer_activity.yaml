@@ -25,6 +25,9 @@ sensor:
   - platform: template
     sensors:
       gaming_pc_status:
+        entity_id:
+          - binary_sensor.gaming_pc_activity
+          - binary_sensor.gaming_pc_overwatch
         value_template: >-
           {% if is_state('binary_sensor.gaming_pc_activity', 'on') %}
             {% if is_state('binary_sensor.gaming_pc_overwatch', 'on') %}

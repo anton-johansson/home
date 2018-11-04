@@ -41,6 +41,8 @@ sensor:
             0
           {% endif %}
       dishwasher_status:
+        entity_id:
+          - input_select.dishwasher_status
         value_template: "{{ states.input_select.dishwasher_status.state }}"
         icon_template: mdi:beer
         friendly_name: Dishwasher status
