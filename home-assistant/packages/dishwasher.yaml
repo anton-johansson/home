@@ -15,10 +15,10 @@ homeassistant:
     sensor.dishwasher_power_usage:
       friendly_name: Dishwasher power
       icon: mdi:flash
-    switch.philio_technology_corporation_pan16_smart_energy_plug_in_switch_switch:
+    switch.powerplug_dishwasher:
       hidden: true
   customize_glob:
-    sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch*:
+    sensor.powerplug_dishwasher*:
       hidden: true
 
 input_select:
@@ -35,8 +35,8 @@ sensor:
       dishwasher_power_usage:
         unit_of_measurement: 'W'
         value_template: >-
-          {% if states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state|float < 5000 %}
-            {{ states.sensor.philio_technology_corporation_pan16_smart_energy_plug_in_switch_power.state }}
+          {% if states.sensor.powerplug_dishwasher_power.state|float < 5000 %}
+            {{ states.sensor.powerplug_dishwasher_power.state }}
           {% else %}
             0
           {% endif %}
