@@ -72,23 +72,23 @@ services:
       traefik.frontend.entryPoints: "https"
 
   deconz:
-    image: marthoc/deconz:amd64-2.05.11
+    image: marthoc/deconz:amd64-2.05.47
     container_name: deconz
     networks:
       - traefik-net
     volumes:
       - /home/anton/home/deconz:/root/.local/share/dresden-elektronik/deCONZ
+      - /etc/localtime:/etc/localtime:ro
     restart: always
     devices:
       - /dev/ttyUSB0
     environment:
       - DECONZ_WEB_PORT=8080
-      - DECONZ_WS_PORT=8443
     labels:
       traefik.enable: "true"
       traefik.port: 8080
       traefik.frontend.rule: "Host:deconz.anton-johansson.com"
-      traefik.frontend.entryPoints: "https"
+      traefik.frontend.entryPoints: "http"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
   portainer:

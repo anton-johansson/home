@@ -60,7 +60,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.officelightstrip
+          entity_id: light.office_lightstrip
   - id: turn_off_office_lightstrip
     alias: Turn off office lightstrip
     trigger:
@@ -73,4 +73,4 @@ automation:
     action:
       - service: light.turn_off
         data:
-          entity_id: light.officelightstrip
+          entity_id: light.office_lightstrip

@@ -1,4 +1,2 @@
-/config.ini
-/session.default
-/zcldb.txt
-/zll.db
+*
+!.gitignore
