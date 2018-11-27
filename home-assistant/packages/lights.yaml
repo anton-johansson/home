@@ -2,6 +2,11 @@
 # Configures all the lights of the home.
 #
 
+homeassistant:
+  customize:
+    sensor.daylight:
+      hidden: true
+
 deconz:
   host: deconz
   port: 8080
