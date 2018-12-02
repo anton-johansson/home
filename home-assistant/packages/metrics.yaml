@@ -1,0 +1,6 @@
+#
+# Configures metrics (Prometheus and Grafana)
+#
+
+prometheus:
+  namespace: homeassistant

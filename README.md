@@ -17,6 +17,8 @@ echo "DOMAIN_DECONZ=<redacted>" | sudo tee -a /etc/environment
 echo "DOMAIN_PORTAINER=<redacted>" | sudo tee -a /etc/environment
 echo "DOMAIN_ELASTICSEARCH=<redacted>" | sudo tee -a /etc/environment
 echo "DOMAIN_KIBANA=<redacted>" | sudo tee -a /etc/environment
+echo "DOMAIN_PROMETHEUS=<redacted>" | sudo tee -a /etc/environment
+echo "<redacted>" | tee /home/$USER/home/home-assistant/bearer-tokens/prometheus
 ```
 
 ## Running home tools

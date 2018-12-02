@@ -7,6 +7,11 @@ networks:
     driver: bridge
   logstash-net:
     driver: bridge
+  prometheus-net:
+    driver: bridge
+
+volumes:
+  prometheus-data:
 
 services:
 
@@ -59,6 +64,7 @@ services:
     container_name: home-assistant
     networks:
       - traefik-net
+      - prometheus-net
     volumes:
       - /home/$USER/home/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -180,6 +186,23 @@ services:
       traefik.port: 5601
       traefik.frontend.rule: "Host:$DOMAIN_KIBANA"
       traefik.frontend.entryPoints: "https"
+      traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
+
+  prometheus:
+    image: prom/prometheus:v2.5.0
+    container_name: prometheus
+    networks:
+      - traefik-net
+      - prometheus-net
+    volumes:
+      - /home/$USER/home/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
+      - /home/$USER/home/home-assistant/bearer-tokens/prometheus:/etc/prometheus/home-assistant-bearer-token:ro
+      - prometheus-data:/prometheus
+    labels:
+      traefik.enable: "true"
+      traefik.port: 9090
+      traefik.frontend.rule: "Host:$DOMAIN_PROMETHEUS"
+      traefik.frontend.entryPoints: "http"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
   logspout:
