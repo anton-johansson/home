@@ -71,6 +71,24 @@ services:
       traefik.frontend.rule: "Host:home.anton-johansson.com"
       traefik.frontend.entryPoints: "https"
 
+  ios-homebridge:
+    image: oznu/homebridge:1.7.9-debian
+    container_name: ios-homebridge
+    restart: always
+    depends_on:
+      - home-assistant
+    extra_hosts:
+      - "home.anton-johansson.com:$HOST_IP"
+    network_mode: host
+    environment:
+      - TZ=Europe/Stockholm
+      - PGID=1000
+      - PUID=1000
+      - HOMEBRIDGE_CONFIG_UI=1
+      - HOMEBRIDGE_CONFIG_UI_PORT=8124
+    volumes:
+      - /home/anton/home/ios-homebridge/data:/homebridge
+
   deconz:
     image: marthoc/deconz:amd64-2.05.47
     container_name: deconz
