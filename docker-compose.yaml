@@ -64,7 +64,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: always
     devices:
-      - /dev/ttyACM0:/dev/zwave
+      - /dev/ttyACM1:/dev/zwave
     labels:
       traefik.enable: "true"
       traefik.port: 8123
