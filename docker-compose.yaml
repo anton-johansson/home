@@ -29,7 +29,7 @@ services:
     labels:
       traefik.enable: "true"
       traefik.port: 8080
-      traefik.frontend.rule: "Host:traefik.anton-johansson.com"
+      traefik.frontend.rule: "Host:$DOMAIN_TRAEFIK"
       traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
     command:
@@ -60,7 +60,7 @@ services:
     networks:
       - traefik-net
     volumes:
-      - /home/anton/home/home-assistant:/config
+      - /home/$USER/home/home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
     restart: always
     devices:
@@ -68,7 +68,7 @@ services:
     labels:
       traefik.enable: "true"
       traefik.port: 8123
-      traefik.frontend.rule: "Host:home.anton-johansson.com"
+      traefik.frontend.rule: "Host:$DOMAIN_HOMEASSISTANT"
       traefik.frontend.entryPoints: "https"
 
   ios-homebridge:
@@ -78,7 +78,7 @@ services:
     depends_on:
       - home-assistant
     extra_hosts:
-      - "home.anton-johansson.com:$HOST_IP"
+      - "$DOMAIN_HOMEASSISTANT:$HOST_IP"
     network_mode: host
     environment:
       - TZ=Europe/Stockholm
@@ -87,7 +87,7 @@ services:
       - HOMEBRIDGE_CONFIG_UI=1
       - HOMEBRIDGE_CONFIG_UI_PORT=8124
     volumes:
-      - /home/anton/home/ios-homebridge/data:/homebridge
+      - /home/$USER/home/ios-homebridge/data:/homebridge
 
   deconz:
     image: marthoc/deconz:amd64-2.05.47
@@ -95,7 +95,7 @@ services:
     networks:
       - traefik-net
     volumes:
-      - /home/anton/home/deconz:/root/.local/share/dresden-elektronik/deCONZ
+      - /home/$USER/home/deconz:/root/.local/share/dresden-elektronik/deCONZ
       - /etc/localtime:/etc/localtime:ro
     restart: always
     devices:
@@ -105,7 +105,7 @@ services:
     labels:
       traefik.enable: "true"
       traefik.port: 8080
-      traefik.frontend.rule: "Host:deconz.anton-johansson.com"
+      traefik.frontend.rule: "Host:$DOMAIN_DECONZ"
       traefik.frontend.entryPoints: "http"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
@@ -116,12 +116,12 @@ services:
       - traefik-net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/anton/home/portainer/data:/data
+      - /home/$USER/home/portainer/data:/data
     restart: always
     labels:
       traefik.enable: "true"
       traefik.port: 9000
-      traefik.frontend.rule: "Host:portainer.anton-johansson.com"
+      traefik.frontend.rule: "Host:$DOMAIN_PORTAINER"
       traefik.frontend.entryPoints: "https"
 
   elasticsearch:
@@ -140,11 +140,11 @@ services:
         hard: -1
     restart: always
     volumes:
-      - /home/anton/home/elasticsearch/data:/usr/share/elasticsearch/data
+      - /home/$USER/home/elasticsearch/data:/usr/share/elasticsearch/data
     labels:
       traefik.enable: "true"
       traefik.port: 9200
-      traefik.frontend.rule: "Host:elasticsearch.anton-johansson.com"
+      traefik.frontend.rule: "Host:$DOMAIN_ELASTICSEARCH"
       traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
@@ -158,9 +158,9 @@ services:
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
     restart: always
     volumes:
-      - /home/anton/home/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - /home/anton/home/logstash/config/template.json:/usr/share/logstash/config/template.json:ro
-      - /home/anton/home/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - /home/$USER/home/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - /home/$USER/home/logstash/config/template.json:/usr/share/logstash/config/template.json:ro
+      - /home/$USER/home/logstash/pipeline:/usr/share/logstash/pipeline:ro
     depends_on:
       - elasticsearch
 
@@ -171,14 +171,14 @@ services:
       - elasticsearch-net
       - traefik-net
     volumes:
-      - /home/anton/home/kibana/config:/usr/share/kibana/config:ro
+      - /home/$USER/home/kibana/config:/usr/share/kibana/config:ro
     restart: always
     depends_on:
       - elasticsearch
     labels:
       traefik.enable: "true"
       traefik.port: 5601
-      traefik.frontend.rule: "Host:kibana.anton-johansson.com"
+      traefik.frontend.rule: "Host:$DOMAIN_KIBANA"
       traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 

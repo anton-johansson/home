@@ -11,6 +11,12 @@ Environment variables needs to be set up before starting the services.
 
 ```shell
 echo "HOST_IP=$(hostname -I | cut -d ' ' -f1)" | sudo tee -a /etc/environment
+echo "DOMAIN_TRAEFIK=<redacted>" | sudo tee -a /etc/environment
+echo "DOMAIN_HOMEASSISTANT=<redacted>" | sudo tee -a /etc/environment
+echo "DOMAIN_DECONZ=<redacted>" | sudo tee -a /etc/environment
+echo "DOMAIN_PORTAINER=<redacted>" | sudo tee -a /etc/environment
+echo "DOMAIN_ELASTICSEARCH=<redacted>" | sudo tee -a /etc/environment
+echo "DOMAIN_KIBANA=<redacted>" | sudo tee -a /etc/environment
 ```
 
 ## Running home tools
