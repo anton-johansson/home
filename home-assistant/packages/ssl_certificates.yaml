@@ -3,12 +3,15 @@
 #
 
 homeassistant:
-  customize_glob:
+  customize:
     sensor.ssl_cert_home_assistant:
       friendly_name: !secret http_domain
     sensor.ssl_cert_portainer:
       friendly_name: !secret portainer_domain
-  customize:
+    sensor.ssl_cert_prometheus:
+      friendly_name: !secret prometheus_domain
+    sensor.ssl_cert_grafana:
+      friendly_name: !secret grafana_domain
     automation.notify_when_home_assistant_ssl_cert_expires_soon:
       hidden: true
 
@@ -19,6 +22,12 @@ sensor:
   - platform: cert_expiry
     host: !secret portainer_domain
     name: ssl_cert_portainer
+  - platform: cert_expiry
+    host: !secret prometheus_domain
+    name: ssl_cert_prometheus
+  - platform: cert_expiry
+    host: !secret grafana_domain
+    name: ssl_cert_grafana
 
 group:
   ssl:
@@ -26,6 +35,8 @@ group:
     entities:
       - sensor.ssl_cert_home_assistant
       - sensor.ssl_cert_portainer
+      - sensor.ssl_cert_prometheus
+      - sensor.ssl_cert_grafana
 
 automation:
   - alias: notify_when_home_assistant_ssl_cert_expires_soon

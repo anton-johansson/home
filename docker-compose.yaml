@@ -12,6 +12,7 @@ networks:
 
 volumes:
   prometheus-data:
+  grafana-data:
 
 services:
 
@@ -202,8 +203,23 @@ services:
       traefik.enable: "true"
       traefik.port: 9090
       traefik.frontend.rule: "Host:$DOMAIN_PROMETHEUS"
-      traefik.frontend.entryPoints: "http"
+      traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
+
+  grafana:
+    image: grafana/grafana:5.3.4
+    container_name: grafana
+    networks:
+      - traefik-net
+      - prometheus-net
+    restart: always
+    volumes:
+      - grafana-data:/var/lib/grafana
+    labels:
+      traefik.enable: "true"
+      traefik.port: 3000
+      traefik.frontend.rule: "Host:$DOMAIN_GRAFANA"
+      traefik.frontend.entryPoints: "https"
 
   logspout:
     build:
