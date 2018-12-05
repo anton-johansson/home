@@ -11,6 +11,7 @@ networks:
     driver: bridge
 
 volumes:
+  elasticsearch-data:
   prometheus-data:
   grafana-data:
 
@@ -132,7 +133,7 @@ services:
       traefik.frontend.entryPoints: "https"
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.5.2
     container_name: elasticsearch
     networks:
       - elasticsearch-net
@@ -147,7 +148,7 @@ services:
         hard: -1
     restart: always
     volumes:
-      - /home/$USER/home/elasticsearch/data:/usr/share/elasticsearch/data
+      - elasticsearch-data:/usr/share/elasticsearch/data
     labels:
       traefik.enable: "true"
       traefik.port: 9200
@@ -156,7 +157,7 @@ services:
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
   logstash:
-    image: docker.elastic.co/logstash/logstash-oss:6.2.4
+    image: docker.elastic.co/logstash/logstash-oss:6.5.2
     container_name: logstash
     networks:
       - elasticsearch-net
@@ -172,7 +173,7 @@ services:
       - elasticsearch
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.2.4
+    image: docker.elastic.co/kibana/kibana-oss:6.5.2
     container_name: kibana
     networks:
       - elasticsearch-net
