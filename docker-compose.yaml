@@ -12,6 +12,7 @@ networks:
 
 volumes:
   elasticsearch-data:
+  filebeat-data:
   prometheus-data:
   grafana-data:
 
@@ -190,6 +191,22 @@ services:
       traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
 
+  filebeat:
+    image: docker.elastic.co/beats/filebeat-oss:6.5.2
+    container_name: filebeat
+    user: root
+    command: -e --strict.perms=false
+    networks:
+      - logstash-net
+    restart: always
+    volumes:
+      - /home/$USER/home/filebeat/filebeat.yaml:/usr/share/filebeat/filebeat.yml:ro
+      - filebeat-data:/usr/share/filebeat/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    depends_on:
+      - logstash
+
   prometheus:
     image: prom/prometheus:v2.5.0
     container_name: prometheus
@@ -221,17 +238,3 @@ services:
       traefik.port: 3000
       traefik.frontend.rule: "Host:$DOMAIN_GRAFANA"
       traefik.frontend.entryPoints: "https"
-
-  logspout:
-    build:
-      context: logspout
-    container_name: logspout
-    networks:
-      - logstash-net
-    environment:
-      - ROUTE_URIS=logstash://logstash:5000
-    restart: on-failure
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - logstash

@@ -1,17 +1,55 @@
 {
-  "@version": "1",
-  "host": "172.18.0.8",
+  "host": {
+    "name": "6faed49702b2"
+  },
+  "@timestamp": "2018-12-03T22:18:19.212Z",
   "stream": "stdout",
-  "msg": "Preparing server traefik &{Address::8080 TLS:<nil> Redirect:<nil> Auth:<nil> WhitelistSourceRange:[] WhiteList:<nil> Compress:false ProxyProtocol:<nil> ForwardedHeaders:0xc000370720} with readTimeout=0s writeTimeout=0s idleTimeout=3m0s",
-  "time": "2018-10-27T14:17:25Z",
-  "@timestamp": "2018-10-27T14:17:25.114Z",
-  "tags": [],
-  "level": "info",
+  "prospector": {
+    "type": "docker"
+  },
   "docker": {
-    "image": "traefik:1.7.3-alpine",
-    "hostname": "91da702d6004",
-    "id": "91da702d6004cc3babed546bb54e87eded440bc3f312b32d89d3923289c05d2e",
-    "name": "/traefik",
-    "labels": null
-  }
+    "container": {
+      "image": "traefik:1.7.3-alpine",
+      "name": "traefik",
+      "id": "c9a7607086f62ada8e69a2e55242a9a26a0195af77ca2b78668f8629e36106a2",
+      "labels": {
+        "org": {
+          "label-schema": {
+            "name": "Traefik",
+            "description": "A modern reverse-proxy",
+            "url": "https://traefik.io",
+            "vendor": "Containous",
+            "docker": {
+              "schema-version": "1.0"
+            },
+            "version": "v1.7.3"
+          }
+        }
+      }
+    }
+  },
+  "source": "/var/lib/docker/containers/c9a7607086f62ada8e69a2e55242a9a26a0195af77ca2b78668f8629e36106a2/c9a7607086f62ada8e69a2e55242a9a26a0195af77ca2b78668f8629e36106a2-json.log",
+  "@version": "1",
+  "json": {
+    "msg": "Server configuration reloaded on :80",
+    "level": "info",
+    "message": "",
+    "time": "2018-12-03T22:18:19Z",
+    "error": {
+      "message": "Key 'message' not found",
+      "type": "json"
+    }
+  },
+  "tags": [
+    "beats_input_raw_event"
+  ],
+  "beat": {
+    "hostname": "6faed49702b2",
+    "version": "6.5.2",
+    "name": "6faed49702b2"
+  },
+  "input": {
+    "type": "docker"
+  },
+  "offset": 39297
 }

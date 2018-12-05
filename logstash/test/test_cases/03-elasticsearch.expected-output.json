@@ -1,20 +1,55 @@
 {
-  "@timestamp": "2018-05-27T15:59:42.151Z",
-  "@version": "1",
+  "host": {
+    "name": "6faed49702b2"
+  },
+  "@timestamp": "2018-12-05T21:16:10.774Z",
+  "stream": "stdout",
+  "prospector": {
+    "type": "docker"
+  },
   "docker": {
-    "hostname": "74ab19cd30b4",
-    "id": "74ab19cd30b403e00d6634d9951224e83305208a22f12911de6cabbbd5997d32",
-    "image": "docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4",
-    "labels": null,
-    "name": "elasticsearch"
+    "container": {
+      "name": "elasticsearch",
+      "image": "docker.elastic.co/elasticsearch/elasticsearch-oss:6.5.2",
+      "id": "5ee35b89f614b8bec31ba40da05f15cb733b5f997c8166b6bbdc840fa3888998",
+      "labels": {
+        "org": {
+          "label-schema": {
+            "name": "elasticsearch",
+            "vcs-url": "https://github.com/elastic/elasticsearch-docker",
+            "url": "https://www.elastic.co/products/elasticsearch",
+            "vendor": "Elastic",
+            "version": "6.5.2",
+            "schema-version": "1.0",
+            "license": "GPLv2",
+            "build-date": "20181006"
+          }
+        },
+        "license": "Apache-2.0"
+      }
+    }
   },
-  "elasticsearch": {
-    "index": "logstash-2018.05.27",
-    "node_id": "Be04vHi"
-  },
-  "host": "localhost",
+  "source": "/var/lib/docker/containers/5ee35b89f614b8bec31ba40da05f15cb733b5f997c8166b6bbdc840fa3888998/5ee35b89f614b8bec31ba40da05f15cb733b5f997c8166b6bbdc840fa3888998-json.log",
+  "@version": "1",
   "message": "update_mapping [doc]",
-  "name": "o.e.c.m.MetaDataMappingService",
   "severity": "INFO",
-  "type": "application"
+  "loggerName": "o.e.c.m.MetaDataMappingService",
+  "logType": "application",
+  "data": {
+    "nodeName": "orNxHV6",
+    "index": "logstash-2018.12.05",
+    "unknownField": "eF9u32mySjynZGj306CU6g"
+  },
+  "tags": [
+    "beats_input_raw_event"
+  ],
+  "beat": {
+    "hostname": "6faed49702b2",
+    "name": "6faed49702b2",
+    "version": "6.5.2"
+  },
+  "input": {
+    "type": "docker"
+  },
+  "offset": 7447
 }

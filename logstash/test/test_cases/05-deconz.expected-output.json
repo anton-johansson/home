@@ -1,16 +1,35 @@
 {
-  "@timestamp": "2018-05-31T22:17:23.662Z",
-  "@version": "1",
-  "docker": {
-    "hostname": "b0b40bf9d7fe",
-    "id": "b0b40bf9d7fead1f2aa644dc248afbd28a9c71389ca0b2ad85e9f224065cc379",
-    "image": "marthoc/deconz:amd64-2.05.11",
-    "labels": null,
-    "name": "deconz"
+  "host": {
+    "name": "6faed49702b2"
   },
-  "host": "localhost",
-  "severity": "INFO",
-  "message": "GW firmware version: 0x260b0500",
+  "@timestamp": "2018-12-03T20:21:59.802Z",
   "stream": "stdout",
-  "type": "application"
+  "prospector": {
+    "type": "docker"
+  },
+  "docker": {
+    "container": {
+      "image": "marthoc/deconz:amd64-2.05.47",
+      "name": "deconz",
+      "id": "de482ebfda27ff94e960086d4c5e3332f6e5f6adfe131aa6a1ef1ff5070956b0",
+      "labels": {}
+    }
+  },
+  "source": "/var/lib/docker/containers/de482ebfda27ff94e960086d4c5e3332f6e5f6adfe131aa6a1ef1ff5070956b0/de482ebfda27ff94e960086d4c5e3332f6e5f6adfe131aa6a1ef1ff5070956b0-json.log",
+  "@version": "1",
+  "message": "Current channel 15",
+  "severity": "INFO",
+  "logType": "application",
+  "tags": [
+    "beats_input_raw_event"
+  ],
+  "beat": {
+    "hostname": "6faed49702b2",
+    "version": "6.5.2",
+    "name": "6faed49702b2"
+  },
+  "input": {
+    "type": "docker"
+  },
+  "offset": 675079
 }

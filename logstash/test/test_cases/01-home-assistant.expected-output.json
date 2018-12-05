@@ -1,17 +1,39 @@
 {
-  "@timestamp": "2018-05-27T09:26:52.189Z",
-  "@version": "1",
-  "docker": {
-    "hostname": "74ab19cd30b4",
-    "id": "74ab19cd30b403e00d6634d9951224e83305208a22f12911de6cabbbd5997d32",
-    "image": "homeassistant/home-assistant:0.64.0",
-    "labels": null,
-    "name": "home-assistant"
+  "host": {
+    "name": "6faed49702b2"
   },
-  "host": "localhost",
-  "message": "Bus:Handling <Event state_changed[L]: entity_id=sensor.processor_use, old_state=<state sensor.processor_use=12; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:21.267940+02:00>, new_state=<state sensor.processor_use=22; unit_of_measurement=%, friendly_name=CPU, icon=mdi:memory @ 2018-05-27T11:26:52.274195+02:00>>",
-  "thread": "Main-Thread",
+  "@timestamp": "2018-12-03T06:05:14.413Z",
+  "stream": "stderr",
+  "prospector": {
+    "type": "docker"
+  },
+  "docker": {
+    "container": {
+      "image": "homeassistant/home-assistant:0.81.0",
+      "name": "home-assistant",
+      "labels": {
+        "maintainer": "Paulus Schoutsen <Paulus@PaulusSchoutsen.nl>"
+      },
+      "id": "01b50d0b70216179bd5a1b69843f57c95b98b870b769207b836e5de59c1f7ead"
+    }
+  },
+  "source": "/var/lib/docker/containers/01b50d0b70216179bd5a1b69843f57c95b98b870b769207b836e5de59c1f7ead/01b50d0b70216179bd5a1b69843f57c95b98b870b769207b836e5de59c1f7ead-json.log",
+  "@version": "1",
+  "message": "URL being requested: GET https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
   "severity": "INFO",
-  "name": "homeassistant.core",
-  "type": "application"
+  "thread": "SyncWorker_11",
+  "loggerName": "googleapiclient.discovery",
+  "logType": "application",
+  "tags": [
+    "beats_input_raw_event"
+  ],
+  "beat": {
+    "hostname": "6faed49702b2",
+    "name": "6faed49702b2",
+    "version": "6.5.2"
+  },
+  "input": {
+    "type": "docker"
+  },
+  "offset": 2197956
 }
