@@ -32,7 +32,7 @@
   "@version": "1",
   "json": {
     "msg": "Server configuration reloaded on :80",
-    "level": "info",
+    "level": "warning",
     "message": "",
     "time": "2018-12-03T22:18:19Z",
     "error": {

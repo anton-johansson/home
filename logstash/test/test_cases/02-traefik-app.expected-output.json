@@ -31,7 +31,7 @@
   "source": "/var/lib/docker/containers/c9a7607086f62ada8e69a2e55242a9a26a0195af77ca2b78668f8629e36106a2/c9a7607086f62ada8e69a2e55242a9a26a0195af77ca2b78668f8629e36106a2-json.log",
   "@version": "1",
   "message": "Server configuration reloaded on :80",
-  "severity": "INFO",
+  "severity": "WARN",
   "logType": "application",
   "data": {},
   "tags": [
