@@ -44,11 +44,11 @@ sensor:
         entity_id:
           - input_select.dishwasher_status
         value_template: "{{ states.input_select.dishwasher_status.state }}"
-        icon_template: mdi:beer
+        icon_template: mdi:dishwasher
         friendly_name: Dishwasher status
 
 automation:
-  # Set the dishwasher in running state when the power usage goes up and it is in idle state
+  # Set the dishwasher to running state when the power usage goes up and it is in idle state
   - id: dishwasher_started
     alias: Dishwasher started
     trigger:
@@ -71,7 +71,7 @@ automation:
           title: Dishwasher started
           message: The dishwasher has just started
 
-  # Set the dishwasher in drying state when power drops and it is in running state
+  # Set the dishwasher to drying state when power drops and it is in running state
   - id: dishwasher_drying
     alias: Dishwasher drying
     trigger:
