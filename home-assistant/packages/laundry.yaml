@@ -1,0 +1,104 @@
+#
+# Provides information and notifications about the washing machine and dryer.
+#
+
+homeassistant:
+  customize:
+    automation.washingmachine_started:
+      hidden: true
+      friendly_name: Washing machine started
+    automation.washingmachine_completed:
+      hidden: true
+      friendly_name: Washing machine completed
+    input_select.washingmachine_status:
+      hidden: true
+    sensor.washingmachine_power_usage:
+      icon: mdi:flash
+    switch.powerplug_washingmachine:
+      hidden: true
+  customize_glob:
+    sensor.powerplug_washingmachine*:
+      hidden: true
+
+input_select:
+  washingmachine_status:
+    name: washingmachine_status
+    options:
+      - Idle
+      - Running
+
+sensor:
+  - platform: template
+    sensors:
+      washingmachine_power_usage:
+        friendly_name: Washing machine power
+        unit_of_measurement: 'W'
+        value_template: >-
+          {{ states.sensor.powerplug_washingmachine_power.state }}
+      washingmachine_status:
+        entity_id:
+          - input_select.washingmachine_status
+        value_template: "{{ states.input_select.washingmachine_status.state }}"
+        icon_template: mdi:tshirt-crew
+        friendly_name: Washing machine status
+
+automation:
+  # Set the washing machine in running state when the power usage goes up and it is in idle state
+  - alias: washingmachine_started
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.washingmachine_power_usage
+        above: 5
+        for:
+          minutes: 1
+    condition:
+      - condition: state
+        entity_id: input_select.washingmachine_status
+        state: Idle
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washingmachine_status
+          option: Running
+      - service: notify.notify
+        data:
+          title: Washing machine started
+          message: The washing machine has just started
+
+  # Set washing machine to idle state when power drops and it is in running state
+  - alias: washingmachine_completed
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.washingmachine_power_usage
+        below: 1
+        for:
+          minutes: 1
+    condition:
+      - condition: state
+        entity_id: input_select.washingmachine_status
+        state: Running
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washingmachine_status
+          option: Idle
+      - service: notify.notify
+        data:
+          title: Washing machine finished
+          message: The washing machine has finished and the laundry can be moved to the dryer
+      - service: script.sonos_say
+        data:
+          media_player: living_room
+          volume: 0.3
+          message: The washing machine has finished and the laundry can be moved to the dryer
+          delay: 00:00:05
+
+group:
+  laundry:
+    name: Laundry
+    control: hidden
+    entities:
+      - sensor.washingmachine_status
+      - automation.washingmachine_started
+      - automation.washingmachine_completed
+      - sensor.washingmachine_power_usage
