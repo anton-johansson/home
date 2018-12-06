@@ -1,0 +1,7 @@
+housekeeping_view:
+  name: Housekeeping
+  icon: mdi:broom
+  view: yes
+  entities:
+    - group.dishwasher
+    - group.laundry
