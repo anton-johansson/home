@@ -7,18 +7,9 @@ The configuration for my home tools, such as Home Assistant.
 
 ## Preparing
 
-Environment variables needs to be set up before starting the services.
+Some files needs to be created in order for everything to run properly.
 
 ```shell
-echo "HOST_IP=$(hostname -I | cut -d ' ' -f1)" | sudo tee -a /etc/environment
-echo "DOMAIN_TRAEFIK=<redacted>" | sudo tee -a /etc/environment
-echo "DOMAIN_HOMEASSISTANT=<redacted>" | sudo tee -a /etc/environment
-echo "DOMAIN_DECONZ=<redacted>" | sudo tee -a /etc/environment
-echo "DOMAIN_PORTAINER=<redacted>" | sudo tee -a /etc/environment
-echo "DOMAIN_ELASTICSEARCH=<redacted>" | sudo tee -a /etc/environment
-echo "DOMAIN_KIBANA=<redacted>" | sudo tee -a /etc/environment
-echo "DOMAIN_PROMETHEUS=<redacted>" | sudo tee -a /etc/environment
-echo "DOMAIN_GRAFANA=<redacted>" | sudo tee -a /etc/environment
 echo "<redacted>" | tee /home/$USER/home/home-assistant/bearer-tokens/prometheus
 ```
 
