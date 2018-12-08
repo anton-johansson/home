@@ -1,0 +1,10 @@
+#
+# Creates groups of different units
+#
+
+notify:
+  - platform: group
+    name: home
+    services:
+      - service: ios_iphone
+      - service: tv

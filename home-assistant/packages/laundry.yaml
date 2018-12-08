@@ -108,7 +108,7 @@ automation:
         data:
           entity_id: input_select.washingmachine_status
           option: Idle
-      - service: notify.notify
+      - service: notify.home
         data:
           title: Washing machine finished
           message: The washing machine has finished and the laundry can be moved to the dryer
@@ -154,7 +154,7 @@ automation:
         data:
           entity_id: input_select.dryer_status
           option: Idle
-      - service: notify.notify
+      - service: notify.home
         data:
           title: Dryer finished
           message: The dryer has finished

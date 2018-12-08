@@ -45,7 +45,7 @@ automation:
       entity_id: sensor.ssl_cert_home_assistant
       below: 30
     action:
-      service: notify.notify
+      service: notify.ios_iphone
       data_template:
         title: "SSL certificate expires soon"
         message: "Home Assistant SSL certificate expires in {{ states.sensor.ssl_cert_home_assistant.state }} days!"

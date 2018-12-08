@@ -17,7 +17,7 @@ automation:
       - condition: template
         value_template: "{{ states('persistent_notification.httplogin') != 'unknown' }}"
     action:
-      - service: notify.notify
+      - service: notify.ios_iphone
         data:
           title: "Failed Home Assistant login attempt!"
           message: "{{ states.persistent_notification.httplogin.attributes.message }}"

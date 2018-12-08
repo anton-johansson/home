@@ -29,7 +29,7 @@ automation:
       platform: state
       entity_id: device_tracker.iphone
     action:
-      service: notify.notify
+      service: notify.ios_iphone
       data_template:
         title: "Your location changed"
         message: "Your location changed to '{{ states.device_tracker.iphone.state }}'."

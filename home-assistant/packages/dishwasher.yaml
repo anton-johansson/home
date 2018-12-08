@@ -85,7 +85,7 @@ automation:
         data:
           entity_id: input_select.dishwasher_status
           option: Drying
-      - service: notify.notify
+      - service: notify.home
         data:
           title: Dishwasher drying
           message: The dishwasher is currently drying the dishes
@@ -108,7 +108,7 @@ automation:
         data:
           entity_id: input_select.dishwasher_status
           option: Idle
-      - service: notify.notify
+      - service: notify.home
         data:
           title: Dishwasher finished
           message: The dishwasher has finished and is ready to be emptied

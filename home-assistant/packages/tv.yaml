@@ -9,6 +9,11 @@
 #    username: !secret tv_username
 #    password: !secret tv_password
 
+notify:
+  - platform: nfandroidtv
+    name: TV
+    host: !secret tv_hostname
+
 cast:
   media_player:
     - host: !secret chromecast_hostname
