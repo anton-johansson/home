@@ -90,10 +90,6 @@ automation:
         data:
           entity_id: input_select.washingmachine_status
           option: Running
-      - service: notify.notify
-        data:
-          title: Washing machine started
-          message: The washing machine has just started
 
   # Set washing machine to idle state when power drops and it is in running state
   - alias: washingmachine_completed
@@ -140,10 +136,6 @@ automation:
         data:
           entity_id: input_select.dryer_status
           option: Running
-      - service: notify.notify
-        data:
-          title: Dryer started
-          message: The dryer has just started
 
   # Set dryer to idle state when power drops and it is in running state
   - alias: dryer_completed

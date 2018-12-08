@@ -66,10 +66,6 @@ automation:
         data:
           entity_id: input_select.dishwasher_status
           option: Running
-      - service: notify.notify
-        data:
-          title: Dishwasher started
-          message: The dishwasher has just started
 
   # Set the dishwasher to drying state when power drops and it is in running state
   - id: dishwasher_drying
