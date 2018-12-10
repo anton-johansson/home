@@ -215,7 +215,7 @@ services:
       - prometheus-net
     volumes:
       - /home/$USER/home/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
-      - /home/$USER/home/home-assistant/bearer-tokens/prometheus:/etc/prometheus/home-assistant-bearer-token:ro
+      - /home/$USER/home/home-assistant/bearer-token:/etc/prometheus/home-assistant-bearer-token:ro
       - prometheus-data:/prometheus
     labels:
       traefik.enable: "true"

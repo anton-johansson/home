@@ -10,7 +10,7 @@ The configuration for my home tools, such as Home Assistant.
 Some files needs to be created in order for everything to run properly.
 
 ```shell
-echo "<redacted>" | tee /home/$USER/home/home-assistant/bearer-tokens/prometheus
+echo "<redacted>" | tee /home/$USER/home/home-assistant/bearer-token
 ```
 
 ## Running home tools
