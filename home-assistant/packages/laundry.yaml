@@ -166,11 +166,15 @@ automation:
           delay: 00:00:03
 
 group:
-  laundry:
-    name: Laundry
+  dryer:
+    name: Dryer
+    control: hidden
+    entities:
+      - sensor.dryer_status
+      - sensor.dryer_power_usage
+  washingmachine:
+    name: Washing machine
     control: hidden
     entities:
       - sensor.washingmachine_status
       - sensor.washingmachine_power_usage
-      - sensor.dryer_status
-      - sensor.dryer_power_usage
