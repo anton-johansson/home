@@ -12,6 +12,11 @@ homeassistant:
       hidden: true
     binary_sensor.gaming_pc_overwatch:
       hidden: true
+    switch.powerplug_officeequipment:
+      hidden: true
+  customize_glob:
+    sensor.powerplug_officeequipment*:
+      hidden: true
 
 binary_sensor:
   - platform: template
