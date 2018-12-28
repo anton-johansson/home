@@ -12,6 +12,12 @@ homeassistant:
       friendly_name: !secret prometheus_domain
     sensor.ssl_cert_grafana:
       friendly_name: !secret grafana_domain
+    sensor.ssl_cert_traefik:
+      friendly_name: !secret traefik_domain
+    sensor.ssl_cert_elasticsearch:
+      friendly_name: !secret elasticsearch_domain
+    sensor.ssl_cert_kibana:
+      friendly_name: !secret kibana_domain
     automation.notify_when_home_assistant_ssl_cert_expires_soon:
       hidden: true
 
@@ -28,6 +34,15 @@ sensor:
   - platform: cert_expiry
     host: !secret grafana_domain
     name: ssl_cert_grafana
+  - platform: cert_expiry
+    host: !secret traefik_domain
+    name: ssl_cert_traefik
+  - platform: cert_expiry
+    host: !secret elasticsearch_domain
+    name: ssl_cert_elasticsearch
+  - platform: cert_expiry
+    host: !secret kibana_domain
+    name: ssl_cert_kibana
 
 group:
   ssl:
@@ -37,13 +52,16 @@ group:
       - sensor.ssl_cert_portainer
       - sensor.ssl_cert_prometheus
       - sensor.ssl_cert_grafana
+      - sensor.ssl_cert_traefik
+      - sensor.ssl_cert_elasticsearch
+      - sensor.ssl_cert_kibana
 
 automation:
   - alias: notify_when_home_assistant_ssl_cert_expires_soon
     trigger:
       platform: numeric_state
       entity_id: sensor.ssl_cert_home_assistant
-      below: 30
+      below: 20
     action:
       service: notify.ios_iphone
       data_template:
