@@ -55,6 +55,14 @@ automation:
           password: !secret loopia_password
           domain: !secret loopia_domain
           address: "{{ states.sensor.external_ip_address.state }}"
+          d1: !secret http_domain
+          d2: !secret portainer_domain
+          d3: !secret deconz_domain
+          d4: !secret prometheus_domain
+          d5: !secret grafana_domain
+          d6: !secret traefik_domain
+          d7: !secret elasticsearch_domain
+          d8: !secret kibana_domain
 
 shell_command:
-  update_dns_record: '/config/scripts/update-dns-record.py "{{ username }}" "{{ password }}" "{{ domain }}" "{{ address }}"'
+  update_dns_record: '/config/scripts/update-dns-record.py "{{ username }}" "{{ password }}" "{{ domain }}" "{{ address }}" "{{ d1 }}" "{{ d2 }}" "{{ d3 }}" "{{ d4 }}" "{{ d5 }}" "{{ d6 }}" "{{ d7 }}" "{{ d8 }}"'
