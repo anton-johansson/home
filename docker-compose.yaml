@@ -39,7 +39,7 @@ services:
       traefik.port: 8080
       traefik.frontend.rule: "Host:$DOMAIN_TRAEFIK"
       traefik.frontend.entryPoints: "https"
-      traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
+      traefik.frontend.whiteList.sourceRange: "$NETWORK"
     command:
       - "--entryPoints=Name:http Address::80"
       - "--entryPoints=Name:https Address::443 TLS"
@@ -116,7 +116,7 @@ services:
       traefik.port: 8080
       traefik.frontend.rule: "Host:$DOMAIN_DECONZ"
       traefik.frontend.entryPoints: "http"
-      traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
+      traefik.frontend.whiteList.sourceRange: "$NETWORK"
 
   portainer:
     image: portainer/portainer:1.19.1
@@ -155,7 +155,7 @@ services:
       traefik.port: 9200
       traefik.frontend.rule: "Host:$DOMAIN_ELASTICSEARCH"
       traefik.frontend.entryPoints: "https"
-      traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
+      traefik.frontend.whiteList.sourceRange: "$NETWORK"
 
   logstash:
     image: docker.elastic.co/logstash/logstash-oss:6.5.2
@@ -189,7 +189,7 @@ services:
       traefik.port: 5601
       traefik.frontend.rule: "Host:$DOMAIN_KIBANA"
       traefik.frontend.entryPoints: "https"
-      traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
+      traefik.frontend.whiteList.sourceRange: "$NETWORK"
 
   filebeat:
     image: docker.elastic.co/beats/filebeat-oss:6.5.2
@@ -222,7 +222,7 @@ services:
       traefik.port: 9090
       traefik.frontend.rule: "Host:$DOMAIN_PROMETHEUS"
       traefik.frontend.entryPoints: "https"
-      traefik.frontend.whiteList.sourceRange: "192.168.1.0/24"
+      traefik.frontend.whiteList.sourceRange: "$NETWORK"
 
   grafana:
     image: grafana/grafana:5.3.4
