@@ -17,7 +17,8 @@ I'm using a Google WiFi mesh network setup.
 | `. 15`          | TV                                        |
 | `. 16`          | Sonos PLAYBAR                             |
 | `. 17`          | Sonos ONE (Kitchen)                       |
-| `. 18` - `. 99` | Reserved for additional internal devices. |
+| `. 18`          | Nintendo Switch                           |
+| `. 19` - `. 99` | Reserved for additional internal devices. |
 | `.100` - `.254` | Common DHCP pool.                         |
 
 \* These can be smart switches or additional WiFi points. Currently, my additional WiFi points cannot have static IP addresses, so they're using the regular DHCP pool, but if that ever changes, they'll be moved to this reservation.
