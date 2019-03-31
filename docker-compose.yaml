@@ -73,7 +73,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: always
     devices:
-      - /dev/ttyACM1:/dev/zwave
+      - /dev/ttyACM0:/dev/zwave
     labels:
       traefik.enable: "true"
       traefik.port: 8123
@@ -142,7 +142,7 @@ services:
     environment:
       - cluster.name=anton-johansson
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
     ulimits:
       memlock:
         soft: -1
