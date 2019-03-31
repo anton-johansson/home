@@ -157,6 +157,21 @@ services:
       traefik.frontend.entryPoints: "https"
       traefik.frontend.whiteList.sourceRange: "$NETWORK"
 
+  curator:
+    image: bobrik/curator:5.6.0
+    container_name: curator
+    command:
+      - --config
+      - /etc/curator/config.yaml
+      - /etc/curator/action-file.yaml
+    networks:
+      - elasticsearch-net
+    volumes:
+      - /home/$USER/home/curator/config.yaml:/etc/curator/config.yaml:ro
+      - /home/$USER/home/curator/action-file.yaml:/etc/curator/action-file.yaml:ro
+    depends_on:
+      - elasticsearch
+
   logstash:
     image: docker.elastic.co/logstash/logstash-oss:6.5.2
     container_name: logstash
