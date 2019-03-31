@@ -27,3 +27,10 @@
   - device_id: week_numbers
     name: Week Numbers
     track: false
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: contacts
+    ignore_availability: true
+    name: Contacts
+    track: false

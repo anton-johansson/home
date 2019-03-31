@@ -23,38 +23,38 @@ sensor:
         arg: /config
       - type: memory_use_percent
       - type: processor_use
-      - type: since_last_boot
-  - platform: template
-    sensors:
-      since_last_boot_templated:
-        value_template: >-
-          {% set time = states.sensor.since_last_boot.state.split('.')[0] %}
+#      - type: since_last_boot
+#  - platform: template
+#    sensors:
+#      since_last_boot_templated:
+#        value_template: >-
+#          {% set time = states.sensor.since_last_boot.state.split('.')[0] %}
+#
+#          {% set timeParts = time.split(',') %}
+#          {% if timeParts | length == 2 %}
+#            {% set output = timeParts[0] + ', ' %}
+#            {% set time = timeParts[1] %}
+#          {% elif timeParts | length == 1 %}
+#            {% set output = '' %}
+#            {% set time = timeParts[0] %}
+#          {% endif %}
+#
+#          {% set parts = time.split(':') %}
+#          {% set hours = parts[0] | int %}
+#          {% set minutes = parts[1] | int %}
 
-          {% set timeParts = time.split(',') %}
-          {% if timeParts | length == 2 %}
-            {% set output = timeParts[0] + ', ' %}
-            {% set time = timeParts[1] %}
-          {% elif timeParts | length == 1 %}
-            {% set output = '' %}
-            {% set time = timeParts[0] %}
-          {% endif %}
+#          {% if hours == 1 %}
+#            {% set output = output + '1 hour and ' %}
+#          {% else %}
+#            {% set output = output + hours | string + ' hours and ' %}
+#          {% endif %}
 
-          {% set parts = time.split(':') %}
-          {% set hours = parts[0] | int %}
-          {% set minutes = parts[1] | int %}
-
-          {% if hours == 1 %}
-            {% set output = output + '1 hour and ' %}
-          {% else %}
-            {% set output = output + hours | string + ' hours and ' %}
-          {% endif %}
-
-          {% if minutes == 1 %}
-            {% set output = output + '1 minute' %}
-          {% else %}
-            {% set output = output + minutes | string + ' minutes' %}
-          {% endif %}
-          {{ output }}
+#          {% if minutes == 1 %}
+#            {% set output = output + '1 minute' %}
+#          {% else %}
+#            {% set output = output + minutes | string + ' minutes' %}
+#          {% endif %}
+#          {{ output }}
 
 group:
   server:
@@ -63,4 +63,4 @@ group:
       - sensor.disk_use_percent_config
       - sensor.memory_use_percent
       - sensor.processor_use
-      - sensor.since_last_boot_templated
+#      - sensor.since_last_boot_templated

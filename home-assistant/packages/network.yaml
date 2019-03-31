@@ -28,16 +28,16 @@ group:
       - sensor.speedtest_ping
       - sensor.external_ip_address
 
+speedtestdotnet:
+  server_id: !secret speedtest_server_id
+  monitored_conditions:
+    - download
+    - upload
+    - ping
+
 sensor:
-  - platform: speedtest
-    server_id: !secret speedtest_server_id
-    monitored_conditions:
-      - download
-      - upload
-      - ping
   - platform: dnsip
     name: external_ip_address
-    host: myip.opendns.com
 
 automation:
   - alias: external_ip_address_changes
