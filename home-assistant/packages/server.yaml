@@ -10,9 +10,9 @@ homeassistant:
       friendly_name: Memory
     sensor.processor_use:
       friendly_name: CPU
-    sensor.since_last_boot_templated:
-      friendly_name: Uptime
-      icon: mdi:clock
+#    sensor.since_last_boot_templated:
+#      friendly_name: Uptime
+#      icon: mdi:clock
     sensor.since_last_boot:
       hidden: true
 
@@ -64,3 +64,38 @@ group:
       - sensor.memory_use_percent
       - sensor.processor_use
 #      - sensor.since_last_boot_templated
+
+automation:
+  - id: server_cpu_high
+    alias: High server CPU usage
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.processor_use
+        above: 10
+    action:
+      - service: notify.ios_iphone
+        data_template:
+          title: "Server machine working hard"
+          message: "High CPU usage on the server: {{ states.sensor.processor_use.state }}%"
+  - id: server_memory_high
+    alias: High server memory usage
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.memory_use_percent
+        above: 40
+    action:
+      - service: notify.ios_iphone
+        data_template:
+          title: "Server machine working hard"
+          message: "High memory usage on the server: {{ states.sensor.memory_use_percent.state }}%"
+  - id: server_cpu_high
+    alias: High server disk space usage
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.disk_use_percent_config
+        above: 40
+    action:
+      - service: notify.ios_iphone
+        data_template:
+          title: "Server using a lot of disk space"
+          message: "High disk space usage on the server: {{ states.sensor.disk_use_percent_config.state }}%"
