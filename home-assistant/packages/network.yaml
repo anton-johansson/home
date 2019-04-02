@@ -22,6 +22,7 @@ homeassistant:
 group:
   network:
     name: Network
+    control: hidden
     entities:
       - sensor.speedtest_download
       - sensor.speedtest_upload

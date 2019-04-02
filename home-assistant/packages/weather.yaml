@@ -41,6 +41,7 @@ sensor:
 group:
   weather:
     name: Weather
+    control: hidden
     entities:
       - sun.sun
       - sensor.weather

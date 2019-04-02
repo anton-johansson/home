@@ -47,6 +47,7 @@ sensor:
 group:
   ssl:
     name: SSL certificates
+    control: hidden
     entities:
       - sensor.ssl_cert_home_assistant
       - sensor.ssl_cert_portainer

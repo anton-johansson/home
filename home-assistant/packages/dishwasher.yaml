@@ -6,10 +6,13 @@ homeassistant:
   customize:
     automation.dishwasher_started:
       hidden: true
+      friendly_name: Dishwasher started
     automation.dishwasher_drying:
       hidden: true
+      friendly_name: Dishwasher drying
     automation.dishwasher_completed:
       hidden: true
+      friendly_name: Dishwasher completed
     input_select.dishwasher_status:
       hidden: true
     sensor.dishwasher_power_usage:
@@ -49,8 +52,7 @@ sensor:
 
 automation:
   # Set the dishwasher to running state when the power usage goes up and it is in idle state
-  - id: dishwasher_started
-    alias: Dishwasher started
+  - alias: dishwasher_started
     trigger:
       - platform: numeric_state
         entity_id: sensor.dishwasher_power_usage
@@ -68,8 +70,7 @@ automation:
           option: Running
 
   # Set the dishwasher to drying state when power drops and it is in running state
-  - id: dishwasher_drying
-    alias: Dishwasher drying
+  - alias: dishwasher_drying
     trigger:
       - platform: numeric_state
         entity_id: sensor.dishwasher_power_usage
@@ -91,8 +92,7 @@ automation:
           message: The dishwasher is currently drying the dishes
 
   # Set dishwasher to idle state when power drops further and it is in drying state
-  - id: dishwasher_completed
-    alias: Dishwasher completed
+  - alias: dishwasher_completed
     trigger:
       - platform: numeric_state
         entity_id: sensor.dishwasher_power_usage
@@ -125,7 +125,4 @@ group:
     control: hidden
     entities:
       - sensor.dishwasher_status
-      - automation.dishwasher_started
-      - automation.dishwasher_drying
-      - automation.dishwasher_completed
       - sensor.dishwasher_power_usage

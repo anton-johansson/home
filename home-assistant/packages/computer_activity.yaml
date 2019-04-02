@@ -49,6 +49,7 @@ sensor:
 group:
   computer_activity:
     name: Computer activity
+    control: hidden
     entities:
       - sensor.gaming_pc_status
 

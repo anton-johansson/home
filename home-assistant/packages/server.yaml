@@ -4,6 +4,15 @@
 
 homeassistant:
   customize:
+    automation.server_cpu_high:
+      hidden: true
+      friendly_name: High server CPU usage
+    automation.server_memory_high:
+      hidden: true
+      friendly_name: High server memory usage
+    automation.server_disk_high:
+      hidden: true
+      friendly_name: High server disk space usage
     sensor.disk_use_percent_config:
       friendly_name: Disk
     sensor.memory_use_percent:
@@ -59,6 +68,7 @@ sensor:
 group:
   server:
     name: Server
+    control: hidden
     entities:
       - sensor.disk_use_percent_config
       - sensor.memory_use_percent
@@ -66,8 +76,7 @@ group:
 #      - sensor.since_last_boot_templated
 
 automation:
-  - id: server_cpu_high
-    alias: High server CPU usage
+  - alias: server_cpu_high
     trigger:
       - platform: numeric_state
         entity_id: sensor.processor_use
@@ -77,8 +86,7 @@ automation:
         data_template:
           title: "Server machine working hard"
           message: "High CPU usage on the server: {{ states.sensor.processor_use.state }}%"
-  - id: server_memory_high
-    alias: High server memory usage
+  - alias: server_memory_high
     trigger:
       - platform: numeric_state
         entity_id: sensor.memory_use_percent
@@ -88,8 +96,7 @@ automation:
         data_template:
           title: "Server machine working hard"
           message: "High memory usage on the server: {{ states.sensor.memory_use_percent.state }}%"
-  - id: server_cpu_high
-    alias: High server disk space usage
+  - alias: server_disk_high
     trigger:
       - platform: numeric_state
         entity_id: sensor.disk_use_percent_config

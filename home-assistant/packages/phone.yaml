@@ -17,6 +17,7 @@ homeassistant:
 group:
   phone:
     name: Phone
+    control: hidden
     entities:
       - device_tracker.iphone
       - sensor.iphone_battery_level
