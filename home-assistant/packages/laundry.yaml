@@ -117,7 +117,7 @@ automation:
           media_player: living_room
           volume: 0.3
           message: The washing machine has finished and the laundry can be moved to the dryer
-          delay: 00:00:05
+          delay: 00:00:04
 
   # Set the dryer to running state when the power usage goes up and it is in idle state
   - alias: dryer_started
