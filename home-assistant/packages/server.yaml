@@ -80,7 +80,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.processor_use
-        above: 10
+        above: 20
     action:
       - service: notify.ios_iphone
         data_template:
