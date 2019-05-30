@@ -253,3 +253,22 @@ services:
       traefik.port: 3000
       traefik.frontend.rule: "Host:$DOMAIN_GRAFANA"
       traefik.frontend.entryPoints: "https"
+
+  callback-proxy-service:
+    image: antonjohansson/callback-proxy-service:v1.2.0
+    container_name: callback-proxy-service
+    networks:
+      - traefik-net
+    restart: always
+    volumes:
+      - /home/$USER/home/callback-proxy-service/config:/etc/callback-proxy-service:ro
+      - /home/$USER/home/callback-proxy-service/data:/var/callback-proxy-service
+    labels:
+      traefik.enable: "true"
+      traefik.config.port: 8181
+      traefik.config.frontend.rule: "Host:$DOMAIN_CALLBACK_PROXY_CONFIG"
+      traefik.config.frontend.entryPoints: "http"
+      traefik.config.frontend.whiteList.sourceRange: "$NETWORK"
+      traefik.service.port: 8182
+      traefik.service.frontend.rule: "Host:$DOMAIN_CALLBACK_PROXY_SERVICE"
+      traefik.service.frontend.entryPoints: "https"

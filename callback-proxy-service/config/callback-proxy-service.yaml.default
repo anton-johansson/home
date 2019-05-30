@@ -1,0 +1,18 @@
+http:
+  proxyEndpoint: https://callback-proxy.example.com
+  session:
+    secret: s3cr3t-s3ss10n-t0k3n
+ui:
+  suggestionPath: :8080
+auth:
+  static:
+    enabled: true
+    users:
+      - username: username
+        password: p4ssw0rd
+        name: My Name
+        email: my-email@gmail.com
+database:
+  fileName: /var/callback-proxy-service/callback-proxy-service.json
+log:
+  level: info
