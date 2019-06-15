@@ -4,5 +4,5 @@ housekeeping_view:
   view: yes
   entities:
     - group.dishwasher
-    - group.dryer
+#    - group.dryer
     - group.washingmachine
