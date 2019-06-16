@@ -2,6 +2,14 @@
 # Controls the Philips TV and related components
 #
 
+homeassistant:
+  customize:
+    switch.powerplug_tvequipment:
+      hidden: true
+  customize_glob:
+    sensor.powerplug_tvequipment*:
+      hidden: true
+
 #media_player:
 #  - platform: philips_tv_2016
 #    name: TV
