@@ -228,6 +228,7 @@ services:
     networks:
       - traefik-net
       - prometheus-net
+    restart: always
     volumes:
       - /home/$USER/home/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
       - /home/$USER/home/home-assistant/bearer-token:/etc/prometheus/home-assistant-bearer-token:ro
