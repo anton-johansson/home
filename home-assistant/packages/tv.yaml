@@ -10,12 +10,13 @@ homeassistant:
     sensor.powerplug_tvequipment*:
       hidden: true
 
-#media_player:
-#  - platform: philips_tv_2016
-#    name: TV
-#    host: !secret tv_hostname
-#    username: !secret tv_username
-#    password: !secret tv_password
+media_player:
+  - platform: philips_android_tv
+    name: TV
+    host: !secret tv_hostname
+    mac: !secret tv_mac
+    username: !secret tv_username
+    password: !secret tv_password
 
 notify:
   - platform: nfandroidtv

@@ -5,4 +5,4 @@ There are things that I want to do that does not exist natively in Home Assistan
 
 ## Media players
 
-* [Philips TV](./media_player/philips_tv_2016.py)
+* [Philips TV](./philips_android_tv.py)

@@ -11,3 +11,5 @@ google_assistant:
       expose: true
     light.office_lightstrip:
       expose: true
+    media_player.tv:
+      expose: true
