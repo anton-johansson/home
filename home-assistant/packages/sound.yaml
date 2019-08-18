@@ -12,6 +12,7 @@ sonos:
     hosts:
       - !secret sonos_playbar_hostname
       - !secret sonos_kitchen_hostname
+      - !secret sonos_bedroom_hostname
 
 script:
   sonos_say:
