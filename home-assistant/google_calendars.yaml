@@ -1,30 +1,28 @@
 - cal_id: !secret google_calendar_personal_id
   entities:
   - device_id: personal
+    ignore_availability: true
     name: Personal
     track: true
 
 - cal_id: !secret google_calendar_work_id
   entities:
   - device_id: work
+    ignore_availability: true
     name: Work
     track: true
-
-- cal_id: '#contacts@group.v.calendar.google.com'
-  entities:
-  - device_id: contacts
-    name: Contacts
-    track: false
 
 - cal_id: sv.swedish#holiday@group.v.calendar.google.com
   entities:
   - device_id: helgdagar_i_sverige
+    ignore_availability: true
     name: Helgdagar i Sverige
     track: false
 
 - cal_id: e_2_sv#weeknum@group.v.calendar.google.com
   entities:
   - device_id: week_numbers
+    ignore_availability: true
     name: Week Numbers
     track: false
 
