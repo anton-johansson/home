@@ -12,7 +12,7 @@ homeassistant:
 
 media_player:
   - platform: philips_android_tv
-    name: TV
+    name: TV screen
     host: !secret tv_hostname
     mac: !secret tv_mac
     username: !secret tv_username
