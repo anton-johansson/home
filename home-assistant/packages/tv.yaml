@@ -26,3 +26,5 @@ notify:
 cast:
   media_player:
     - host: !secret chromecast_hostname
+
+media_extractor:

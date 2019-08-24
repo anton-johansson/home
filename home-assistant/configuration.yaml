@@ -11,6 +11,7 @@ homeassistant:
 frontend:
 system_health:
 config:
+python_script:
 
 http:
   api_password: !secret http_password
