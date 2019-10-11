@@ -7,20 +7,14 @@ The configuration for my home tools, such as Home Assistant.
 
 ## Installing Kubernetes
 
-The Home configuration is running on a single-host Kubernetes cluster. First, we need to disable swap on the machine. This can be done with `swapoff -a`, but this won't be persisted, so also comment out the swap row in `/etc/fstab`. We also need to register two virtual IPs for our server (one for internal HTTP traffic and one for external HTTP traffic). Do this by modifying `/etc/network/interfaces` and add them, something like this:
+The Home configuration is running on a single-host Kubernetes cluster. First, we need to disable swap on the machine. This can be done with `swapoff -a`, but this won't be persisted, so also comment out the swap row in `/etc/fstab`. We also need to register a virtual IP for our internal traffic. Do this by modifying `/etc/network/interfaces` and add this:
 
 ```
-auto <interface>:1
-iface <interface>:1 inet static
-address         <virtual IP 1>
+auto eno1:1
+iface eno1:1 inet static
+address         10.0.0.90
 netmask         255.255.255.0
-broadcast       <broadcast>
-
-auto <interface>:2
-iface <interface>:2 inet static
-address         <virtual IP 2>
-netmask         255.255.255.0
-broadcast       <broadcast>
+broadcast       10.0.0.255
 ```
 
 Then, to install the cluster, the following is done:
