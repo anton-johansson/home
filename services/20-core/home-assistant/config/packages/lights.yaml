@@ -14,5 +14,5 @@ homeassistant:
       homebridge_name: Window
 
 deconz:
-  host: deconz
+  host: deconz.deconz.svc.cluster.local
   port: 8080
