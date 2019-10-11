@@ -6,43 +6,43 @@ homeassistant:
   customize:
     sensor.ssl_cert_home_assistant:
       friendly_name: !secret http_domain
-    sensor.ssl_cert_portainer:
-      friendly_name: !secret portainer_domain
-    sensor.ssl_cert_prometheus:
-      friendly_name: !secret prometheus_domain
-    sensor.ssl_cert_grafana:
-      friendly_name: !secret grafana_domain
-    sensor.ssl_cert_traefik:
-      friendly_name: !secret traefik_domain
-    sensor.ssl_cert_elasticsearch:
-      friendly_name: !secret elasticsearch_domain
-    sensor.ssl_cert_kibana:
-      friendly_name: !secret kibana_domain
-    automation.notify_when_home_assistant_ssl_cert_expires_soon:
-      hidden: true
+#    sensor.ssl_cert_portainer:
+#      friendly_name: !secret portainer_domain
+#    sensor.ssl_cert_prometheus:
+#      friendly_name: !secret prometheus_domain
+#    sensor.ssl_cert_grafana:
+#      friendly_name: !secret grafana_domain
+#    sensor.ssl_cert_traefik:
+#      friendly_name: !secret traefik_domain
+#    sensor.ssl_cert_elasticsearch:
+#      friendly_name: !secret elasticsearch_domain
+#    sensor.ssl_cert_kibana:
+#      friendly_name: !secret kibana_domain
+#    automation.notify_when_home_assistant_ssl_cert_expires_soon:
+#      hidden: true
 
 sensor:
   - platform: cert_expiry
     host: !secret http_domain
     name: ssl_cert_home_assistant
-  - platform: cert_expiry
-    host: !secret portainer_domain
-    name: ssl_cert_portainer
-  - platform: cert_expiry
-    host: !secret prometheus_domain
-    name: ssl_cert_prometheus
-  - platform: cert_expiry
-    host: !secret grafana_domain
-    name: ssl_cert_grafana
-  - platform: cert_expiry
-    host: !secret traefik_domain
-    name: ssl_cert_traefik
-  - platform: cert_expiry
-    host: !secret elasticsearch_domain
-    name: ssl_cert_elasticsearch
-  - platform: cert_expiry
-    host: !secret kibana_domain
-    name: ssl_cert_kibana
+#  - platform: cert_expiry
+#    host: !secret portainer_domain
+#    name: ssl_cert_portainer
+#  - platform: cert_expiry
+#    host: !secret prometheus_domain
+#    name: ssl_cert_prometheus
+#  - platform: cert_expiry
+#    host: !secret grafana_domain
+#    name: ssl_cert_grafana
+#  - platform: cert_expiry
+#    host: !secret traefik_domain
+#    name: ssl_cert_traefik
+#  - platform: cert_expiry
+#    host: !secret elasticsearch_domain
+#    name: ssl_cert_elasticsearch
+#  - platform: cert_expiry
+#    host: !secret kibana_domain
+#    name: ssl_cert_kibana
 
 group:
   ssl:
@@ -50,21 +50,21 @@ group:
     control: hidden
     entities:
       - sensor.ssl_cert_home_assistant
-      - sensor.ssl_cert_portainer
-      - sensor.ssl_cert_prometheus
-      - sensor.ssl_cert_grafana
-      - sensor.ssl_cert_traefik
-      - sensor.ssl_cert_elasticsearch
-      - sensor.ssl_cert_kibana
+#      - sensor.ssl_cert_portainer
+#      - sensor.ssl_cert_prometheus
+#      - sensor.ssl_cert_grafana
+#      - sensor.ssl_cert_traefik
+#      - sensor.ssl_cert_elasticsearch
+#      - sensor.ssl_cert_kibana
 
-automation:
-  - alias: notify_when_home_assistant_ssl_cert_expires_soon
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.ssl_cert_home_assistant
-      below: 20
-    action:
-      service: notify.ios_iphone
-      data_template:
-        title: "SSL certificate expires soon"
-        message: "Home Assistant SSL certificate expires in {{ states.sensor.ssl_cert_home_assistant.state }} days!"
+#automation:
+#  - alias: notify_when_home_assistant_ssl_cert_expires_soon
+#    trigger:
+#      platform: numeric_state
+#      entity_id: sensor.ssl_cert_home_assistant
+#      below: 20
+#    action:
+#      service: notify.ios_iphone
+#      data_template:
+#        title: "SSL certificate expires soon"
+#        message: "Home Assistant SSL certificate expires in {{ states.sensor.ssl_cert_home_assistant.state }} days!"

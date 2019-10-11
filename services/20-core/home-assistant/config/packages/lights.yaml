@@ -6,13 +6,3 @@ homeassistant:
   customize:
     sensor.daylight:
       hidden: true
-    light.office_lightstrip:
-      homebridge_visible: true
-      homebridge_name: Lightstrip
-    light.cornerwindow_light:
-      homebridge_visible: true
-      homebridge_name: Window
-
-deconz:
-  host: deconz.deconz.svc.cluster.local
-  port: 8080
