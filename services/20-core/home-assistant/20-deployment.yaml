@@ -22,7 +22,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /config
-            - name: z-wave-device
+            - name: zwave-device
               mountPath: /dev/zwave
           ports:
             - name: http
@@ -34,6 +34,6 @@ spec:
         - name: data
           hostPath:
             path: /var/home-server/home-assistant
-        - name: z-wave-device
+        - name: zwave-device
           hostPath:
             path: /dev/ttyACM0
