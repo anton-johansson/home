@@ -1,0 +1,39 @@
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: coredns
+  namespace: kube-system
+
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: system:coredns
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+rules:
+  - apiGroups: ['']
+    resources: [endpoints, services, pods, namespaces]
+    verbs: [list, watch]
+  - apiGroups: ['']
+    resources: [nodes]
+    verbs: [get]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: system:coredns
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: 'true'
+roleRef:
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+  name: system:coredns
+subjects:
+  - kind: ServiceAccount
+    name: coredns
+    namespace: kube-system

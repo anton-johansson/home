@@ -1,0 +1,42 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: deconz
+  namespace: deconz
+  labels:
+    app.kubernetes.io/name: deconz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: deconz
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: deconz
+    spec:
+      containers:
+        - name: deconz
+          image: marthoc/deconz:amd64-2.05.66
+          volumeMounts:
+            - name: data
+              mountPath: /root/.local/share/dresden-elektronik/deCONZ
+            - name: device
+              mountPath: /dev/ttyUSB0
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: DECONZ_WEB_PORT
+              value: '8080'
+          securityContext:
+            privileged: true
+      volumes:
+        - name: data
+          hostPath:
+            path: /var/home-server/deconz
+        - name: device
+          hostPath:
+            path: /dev/ttyUSB0
