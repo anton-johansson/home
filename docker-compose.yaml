@@ -80,24 +80,6 @@ services:
       traefik.frontend.rule: "Host:$DOMAIN_HOMEASSISTANT"
       traefik.frontend.entryPoints: "https"
 
-  ios-homebridge:
-    image: oznu/homebridge:1.7.9-debian
-    container_name: ios-homebridge
-    restart: always
-    depends_on:
-      - home-assistant
-    extra_hosts:
-      - "$DOMAIN_HOMEASSISTANT:$HOST_IP"
-    network_mode: host
-    environment:
-      - TZ=Europe/Stockholm
-      - PGID=1000
-      - PUID=1000
-      - HOMEBRIDGE_CONFIG_UI=1
-      - HOMEBRIDGE_CONFIG_UI_PORT=8124
-    volumes:
-      - /home/$USER/home/ios-homebridge/data:/homebridge
-
   deconz:
     image: marthoc/deconz:amd64-2.05.66
     container_name: deconz
