@@ -1,0 +1,16 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: config
+  namespace: prometheus
+data:
+  prometheus.yaml: |
+    scrape_configs:
+      - job_name: 'home-assistant'
+        scrape_interval: 60s
+        metrics_path: /api/prometheus
+        scheme: http
+        bearer_token_file: '/etc/home-assistant/token'
+        static_configs:
+          - targets: ['home-assistant.home-assistant.svc.cluster.local:8123']
