@@ -13,6 +13,9 @@ data:
     [log.console]
     format = json
 
+    [security]
+    allow_embedding = true
+
   datasources.yaml: |
     apiVersion: 1
     datasources:
