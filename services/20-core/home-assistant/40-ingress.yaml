@@ -1,0 +1,24 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+  labels:
+    app.kubernetes.io/name: home-assistant
+  annotations:
+    kubernetes.io/ingress.class: external
+    certmanager.k8s.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+    - host: home.anton-johansson.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: home-assistant
+              servicePort: 8123
+  tls:
+    - secretName: home-assistant-cert
+      hosts:
+        - home.anton-johansson.com

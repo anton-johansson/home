@@ -1,0 +1,8 @@
+#
+# Configures all the lights of the home.
+#
+
+homeassistant:
+  customize:
+    sensor.daylight:
+      hidden: true

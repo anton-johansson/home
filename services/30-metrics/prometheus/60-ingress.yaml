@@ -1,0 +1,19 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: prometheus
+  namespace: prometheus
+  labels:
+    app.kubernetes.io/name: prometheus
+  annotations:
+    kubernetes.io/ingress.class: internal
+spec:
+  rules:
+    - host: prometheus.anton-johansson.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: prometheus
+              servicePort: 9090

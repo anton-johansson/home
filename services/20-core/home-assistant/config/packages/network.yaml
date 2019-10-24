@@ -1,0 +1,69 @@
+#
+# Network
+#
+
+homeassistant:
+  customize_glob:
+    sensor.speedtest_download:
+      friendly_name: Download speed
+      icon: mdi:download
+    sensor.speedtest_upload:
+      friendly_name: Upload speed
+      icon: mdi:upload
+    sensor.speedtest_ping:
+      friendly_name: Ping
+      icon: mdi:timer
+    sensor.external_ip_address:
+      friendly_name: External IP address
+  customize:
+    automation.external_ip_address_changes:
+      hidden: true
+
+group:
+  network:
+    name: Network
+    control: hidden
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+      - sensor.external_ip_address
+
+speedtestdotnet:
+  server_id: !secret speedtest_server_id
+  monitored_conditions:
+    - download
+    - upload
+    - ping
+
+sensor:
+  - platform: dnsip
+    name: external_ip_address
+
+#automation:
+#  - alias: external_ip_address_changes
+#    trigger:
+#      platform: state
+#      entity_id: sensor.external_ip_address
+#    action:
+#      - service: notify.ios_iphone
+#        data_template:
+#          title: "External IP address changed"
+#          message: "The external IP address changed to {{ states.sensor.external_ip_address.state }}. DNS records has been updated."
+#      - service: shell_command.update_dns_record
+#        data_template:
+#          username: !secret loopia_username
+#          password: !secret loopia_password
+#          domain: !secret loopia_domain
+#          address: "{{ states.sensor.external_ip_address.state }}"
+#          d1: !secret http_domain
+#          d2: !secret portainer_domain
+#          d3: !secret deconz_domain
+#          d4: !secret prometheus_domain
+#          d5: !secret grafana_domain
+#          d6: !secret traefik_domain
+#          d7: !secret elasticsearch_domain
+#          d8: !secret kibana_domain
+
+#shell_command:
+#  update_dns_record: '/config/scripts/update-dns-record.py "{{ username }}" "{{ password }}" "{{ domain }}" "{{ address }}" "{{ d1 }}" "{{ d2 }}" "{{ d3 }}" "{{ d4 }}" "{{ d5 }}" "{{ d6 }}" "{{ d7 }}" "{{ d8 }}"'
