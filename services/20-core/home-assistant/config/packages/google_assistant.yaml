@@ -7,7 +7,7 @@ google_assistant:
   api_key: !secret google_assistant_api_key
   expose_by_default: false
   entity_config:
-    light.cornerwindow_light:
+    light.corner_window_light:
       expose: true
     light.office_lightstrip:
       expose: true
