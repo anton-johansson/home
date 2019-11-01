@@ -1,0 +1,67 @@
+#
+# Controls motion sensors and their actions
+#
+
+homeassistant:
+  customize:
+    binary_sensor.multi_hallway_sensor:
+      hidden: true
+    sensor.hallway_motion:
+      hidden: true
+  customize_glob:
+    sensor.multi_hallway_*:
+      hidden: true
+    automation.hallway_motion_*:
+      hidden: true
+
+sensor:
+  - platform: template
+    sensors:
+      hallway_motion:
+        friendly_name: Hallway motion
+        value_template: >-
+          {% if is_state('sensor.multi_hallway_burglar', '0') %}
+            Normal
+          {% elif is_state('sensor.multi_hallway_burglar', '8') %}
+            Movement
+          {% elif is_state('sensor.multi_hallway_burglar', '3') %}
+            Tampering
+          {% else %}
+            Unknown
+          {% endif %}
+
+automation:
+
+  # Warn when hallway sensor is being tampered with
+  - alias: hallway_motion_tamper
+    trigger:
+      - platform: state
+        entity_id: sensor.hallway_motion
+        to: 'Tampering'
+    action:
+      service: notify.ios_iphone
+      data_template:
+        title: "Hallway sensor is being tampered with!"
+        message: "Someone is temperering with the hallway sensor."
+
+  # Warn when hallway sensor is in unknown state
+  - alias: hallway_motion_unknown
+    trigger:
+      - platform: state
+        entity_id: sensor.hallway_motion
+        to: 'Unknown'
+    action:
+      service: notify.ios_iphone
+      data_template:
+        title: "Hallway sensor is in unknown state!"
+        message: "The hallway sensor is in unknown state: {{ states.sensor.multi_hallway_burglar.state }}"
+
+  # Turn on lights when there is movement in the hallway
+  - alias: hallway_motion_movement
+    trigger:
+      - platform: state
+        entity_id: sensor.hallway_motion
+        to: 'Movement'
+    action:
+      service: light.turn_on
+      entity_id: light.corner_window_light
