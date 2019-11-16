@@ -1,0 +1,10 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: webpage
+  namespace: webpage
+spec:
+  ports:
+    - name: http
+      port: 80
