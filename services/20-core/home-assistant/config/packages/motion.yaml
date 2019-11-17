@@ -63,10 +63,11 @@ automation:
         entity_id: sensor.hallway_motion
         to: 'Movement'
     condition:
-      condition: and
+      condition: or
       conditions:
         - condition: sun
           after: sunset
+          after_offset: '-01:00:00'
         - condition: sun
           before: sunrise
     action:
