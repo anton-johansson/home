@@ -18,8 +18,8 @@ homeassistant:
 #      friendly_name: !secret elasticsearch_domain
 #    sensor.ssl_cert_kibana:
 #      friendly_name: !secret kibana_domain
-#    automation.notify_when_home_assistant_ssl_cert_expires_soon:
-#      hidden: true
+    automation.notify_when_home_assistant_ssl_cert_expires_soon:
+      hidden: true
 
 sensor:
   - platform: cert_expiry
@@ -57,14 +57,14 @@ group:
 #      - sensor.ssl_cert_elasticsearch
 #      - sensor.ssl_cert_kibana
 
-#automation:
-#  - alias: notify_when_home_assistant_ssl_cert_expires_soon
-#    trigger:
-#      platform: numeric_state
-#      entity_id: sensor.ssl_cert_home_assistant
-#      below: 20
-#    action:
-#      service: notify.phone
-#      data_template:
-#        title: "SSL certificate expires soon"
-#        message: "Home Assistant SSL certificate expires in {{ states.sensor.ssl_cert_home_assistant.state }} days!"
+automation:
+  - alias: notify_when_home_assistant_ssl_cert_expires_soon
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.ssl_cert_home_assistant
+      below: 20
+    action:
+      service: notify.phone
+      data_template:
+        title: "SSL certificate expires soon"
+        message: "Home Assistant SSL certificate expires in {{ states.sensor.ssl_cert_home_assistant.state }} days!"
