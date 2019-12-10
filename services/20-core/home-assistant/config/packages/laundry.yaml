@@ -114,7 +114,7 @@ automation:
           message: The washing machine has finished and the laundry can be moved to the dryer
       - service: script.sonos_say
         data:
-          media_player: living_room
+          media_player: kitchen
           volume: 0.3
           message: The washing machine has finished and the laundry can be moved to the dryer
           delay: 00:00:04
@@ -160,7 +160,7 @@ automation:
 #          message: The dryer has finished
 #      - service: script.sonos_say
 #        data:
-#          media_player: living_room
+#          media_player: kitchen
 #          volume: 0.3
 #          message: The dryer has finished
 #          delay: 00:00:03
