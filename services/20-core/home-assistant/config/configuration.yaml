@@ -23,8 +23,6 @@ http:
 zwave:
   usb_path: /dev/zwave
 
-ios:
-
 conversation:
 
 map:

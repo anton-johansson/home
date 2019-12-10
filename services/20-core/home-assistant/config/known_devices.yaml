@@ -1,9 +1,0 @@
-
-iphone:
-  hide_if_away: false
-  icon:
-  mac:
-  name: iPhone
-  picture:
-  track: true
-  vendor:
