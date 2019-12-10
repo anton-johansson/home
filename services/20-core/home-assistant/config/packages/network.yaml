@@ -40,16 +40,16 @@ sensor:
   - platform: dnsip
     name: external_ip_address
 
-#automation:
-#  - alias: external_ip_address_changes
-#    trigger:
-#      platform: state
-#      entity_id: sensor.external_ip_address
-#    action:
-#      - service: notify.phone
-#        data_template:
-#          title: "External IP address changed"
-#          message: "The external IP address changed to {{ states.sensor.external_ip_address.state }}. DNS records has been updated."
+automation:
+  - alias: external_ip_address_changes
+    trigger:
+      platform: state
+      entity_id: sensor.external_ip_address
+    action:
+      - service: notify.phone
+        data_template:
+          title: "External IP address changed"
+          message: "The external IP address changed to {{ states.sensor.external_ip_address.state }}. DNS records has been updated."
 #      - service: shell_command.update_dns_record
 #        data_template:
 #          username: !secret loopia_username
