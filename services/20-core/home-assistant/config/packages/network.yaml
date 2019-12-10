@@ -46,7 +46,7 @@ sensor:
 #      platform: state
 #      entity_id: sensor.external_ip_address
 #    action:
-#      - service: notify.ios_iphone
+#      - service: notify.phone
 #        data_template:
 #          title: "External IP address changed"
 #          message: "The external IP address changed to {{ states.sensor.external_ip_address.state }}. DNS records has been updated."

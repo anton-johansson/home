@@ -13,6 +13,8 @@ homeassistant:
     automation.notify_when_location_changes:
       hidden: true
 
+mobile_app:
+
 group:
   phone:
     name: Phone
@@ -46,7 +48,7 @@ automation:
       platform: state
       entity_id: sensor.iphone_location
     action:
-      service: notify.ios_iphone
+      service: notify.phone
       data_template:
         title: "Your location changed"
         message: "Your location changed to '{{ states.sensor.iphone_location.state }}'."

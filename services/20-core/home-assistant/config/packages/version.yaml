@@ -50,7 +50,7 @@ automation:
         entity_id: binary_sensor.version_available
         state: 'on'
     action:
-      service: notify.ios_iphone
+      service: notify.phone
       data_template:
         title: "New Home Assistant version"
         message: "Version {{ states.sensor.version_latest.state }} for Home Assistant is available."

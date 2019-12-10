@@ -39,7 +39,7 @@ automation:
         entity_id: sensor.hallway_motion
         to: 'Tampering'
     action:
-      service: notify.ios_iphone
+      service: notify.phone
       data_template:
         title: "Hallway sensor is being tampered with!"
         message: "Someone is temperering with the hallway sensor."
@@ -51,7 +51,7 @@ automation:
         entity_id: sensor.hallway_motion
         to: 'Unknown'
     action:
-      service: notify.ios_iphone
+      service: notify.phone
       data_template:
         title: "Hallway sensor is in unknown state!"
         message: "The hallway sensor is in unknown state: {{ states.sensor.multi_hallway_burglar.state }}"

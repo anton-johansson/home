@@ -82,7 +82,7 @@ automation:
         entity_id: sensor.processor_use
         above: 20
     action:
-      - service: notify.ios_iphone
+      - service: notify.phone
         data_template:
           title: "Server machine working hard"
           message: "High CPU usage on the server: {{ states.sensor.processor_use.state }}%"
@@ -92,7 +92,7 @@ automation:
         entity_id: sensor.memory_use_percent
         above: 40
     action:
-      - service: notify.ios_iphone
+      - service: notify.phone
         data_template:
           title: "Server machine working hard"
           message: "High memory usage on the server: {{ states.sensor.memory_use_percent.state }}%"
@@ -102,7 +102,7 @@ automation:
         entity_id: sensor.disk_use_percent_config
         above: 40
     action:
-      - service: notify.ios_iphone
+      - service: notify.phone
         data_template:
           title: "Server using a lot of disk space"
           message: "High disk space usage on the server: {{ states.sensor.disk_use_percent_config.state }}%"
