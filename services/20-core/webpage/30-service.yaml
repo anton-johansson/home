@@ -1,0 +1,28 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: webpage-prod
+  namespace: webpage
+spec:
+  ports:
+    - name: http
+      port: 80
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: webpage-stage
+  namespace: webpage
+  labels:
+    app.kubernetes.io/name: webpage
+    app.kubernetes.io/instance: stage
+spec:
+  selector:
+    app.kubernetes.io/name: webpage
+    app.kubernetes.io/instance: stage
+  ports:
+    - port: 4000
+      targetPort: 4000
+      protocol: TCP

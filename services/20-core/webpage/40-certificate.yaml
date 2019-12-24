@@ -1,0 +1,39 @@
+---
+kind: Certificate
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: webpage-prod
+  namespace: webpage
+  labels:
+    app.kubernetes.io/name: home-assistant
+    app.kubernetes.io/instance: prod
+spec:
+  secretName: webpage-prod-certificate
+  dnsNames:
+    - anton-johansson.com
+    - anton-johansson.se
+    - www.anton-johansson.com
+    - www.anton-johansson.se
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+---
+kind: Certificate
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: webpage-stage
+  namespace: webpage
+  labels:
+    app.kubernetes.io/name: home-assistant
+    app.kubernetes.io/instance: stage
+spec:
+  secretName: webpage-stage-certificate
+  dnsNames:
+    - stage.anton-johansson.com
+    - stage.anton-johansson.se
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
