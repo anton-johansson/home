@@ -1,0 +1,57 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: webpage-prod
+  namespace: webpage
+  labels:
+    app.kubernetes.io/name: webpage
+    app.kubernetes.io/instance: prod
+  annotations:
+    kubernetes.io/ingress.class: external
+    nginx.ingress.kubernetes.io/from-to-www-redirect: 'true'
+    nginx.ingress.kubernetes.io/permanent-redirect: https://github.com/anton-johansson
+spec:
+  rules:
+    - host: anton-johansson.com
+      http: &http
+        paths:
+          - path: /
+            backend:
+              serviceName: webpage
+              servicePort: 80
+    - host: anton-johansson.se
+      http: *http
+  tls:
+    - secretName: webpage-prod-certificate
+      hosts:
+        - anton-johansson.com
+        - anton-johansson.se
+
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: webpage-stage
+  namespace: webpage
+  labels:
+    app.kubernetes.io/name: webpage
+    app.kubernetes.io/instance: stage
+  annotations:
+    kubernetes.io/ingress.class: external
+spec:
+  rules:
+    - host: stage.anton-johansson.com
+      http: &http
+        paths:
+          - path: /
+            backend:
+              serviceName: webpage-stage
+              servicePort: 4000
+    - host: stage.anton-johansson.se
+      http: *http
+  tls:
+    - secretName: webpage-stage-certificate
+      hosts:
+        - stage.anton-johansson.com
+        - stage.anton-johansson.se
