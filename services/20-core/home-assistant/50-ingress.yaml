@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/name: home-assistant
   annotations:
     kubernetes.io/ingress.class: external
-    certmanager.k8s.io/cluster-issuer: letsencrypt
 spec:
   rules:
     - host: home.anton-johansson.com
@@ -19,6 +18,6 @@ spec:
               serviceName: home-assistant
               servicePort: 8123
   tls:
-    - secretName: home-assistant-cert
+    - secretName: home-assistant-certificate
       hosts:
         - home.anton-johansson.com

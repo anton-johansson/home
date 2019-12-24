@@ -1,0 +1,16 @@
+---
+kind: Certificate
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: grafana
+  namespace: grafana
+  labels:
+    app.kubernetes.io/name: grafana
+spec:
+  secretName: grafana-certificate
+  dnsNames:
+    - grafana.anton-johansson.com
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io

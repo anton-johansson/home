@@ -1,0 +1,31 @@
+---
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: hello@anton-johansson.com
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+      - http01:
+          ingress:
+            class: external
+
+---
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: hello@anton-johansson.com
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+      - http01:
+          ingress:
+            class: external
