@@ -23,6 +23,10 @@ http:
 zwave:
   usb_path: /dev/zwave
 
+zha:
+  usb_path: /dev/zigbee
+  radio_type: deconz
+
 conversation:
 
 map:

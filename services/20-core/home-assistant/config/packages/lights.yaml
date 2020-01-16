@@ -6,3 +6,9 @@ homeassistant:
   customize:
     sensor.daylight:
       hidden: true
+
+light:
+  - platform: group
+    name: Bedroom nightstand
+    entities:
+      - light.bedroom_nightstand_left

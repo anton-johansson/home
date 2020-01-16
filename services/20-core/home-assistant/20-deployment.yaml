@@ -24,6 +24,8 @@ spec:
               mountPath: /config
             - name: zwave-device
               mountPath: /dev/zwave
+            - name: zigbee-device
+              mountPath: /dev/zigbee
           ports:
             - name: http
               containerPort: 8080
@@ -37,3 +39,6 @@ spec:
         - name: zwave-device
           hostPath:
             path: /dev/ttyACM0
+        - name: zigbee-device
+          hostPath:
+            path: /dev/ttyUSB0
