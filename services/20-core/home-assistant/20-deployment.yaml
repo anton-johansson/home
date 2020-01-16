@@ -11,6 +11,9 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: home-assistant
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
   template:
     metadata:
       labels:
