@@ -1,0 +1,113 @@
+#
+# The wake-up alarm clock
+#
+
+homeassistant:
+  customize:
+    automation.trigger_alarm_clock:
+      friendly_name: Enabled
+      icon: mdi:alarm-check
+    input_datetime.alarm_clock_time:
+      icon: mdi:alarm
+    input_boolean.alarm_clock_repeat:
+      icon: mdi:calendar-clock
+  customize_glob:
+    input_boolean.alarm_clock_day_*:
+      icon: mdi:calendar-multiselect
+
+sensor:
+  - platform: time_date
+    display_options:
+      - time
+
+input_datetime:
+  alarm_clock_time:
+    name: Time
+    has_date: false
+    has_time: true
+
+input_boolean:
+  alarm_clock_repeat:
+    name: Repeat
+  alarm_clock_day_0:
+    name: Monday
+  alarm_clock_day_1:
+    name: Tuesday
+  alarm_clock_day_2:
+    name: Wednesday
+  alarm_clock_day_3:
+    name: Thursday
+  alarm_clock_day_4:
+    name: Friday
+  alarm_clock_day_5:
+    name: Saturday
+  alarm_clock_day_6:
+    name: Sunday
+
+automation:
+  - alias: trigger_alarm_clock
+    trigger:
+      - platform: state
+        entity_id: sensor.time
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{ states.sensor.time.state == ((states.input_datetime.alarm_clock_time.attributes.timestamp | int - 600) | timestamp_custom("%H:%M", False)) }}'
+        - condition: state
+          entity_id: sensor.phone_location
+          state: Home
+        - condition: template
+          value_template: '{{ states("input_boolean.alarm_clock_day_" + (now().weekday() | string)) == "on" }}'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.bedroom_nightstand
+          transition: 540
+          brightness_pct: 100
+      - service: notify.phone
+        data_template:
+          title: "Alarm clock"
+          message: "Starting to dim nightstand light"
+      - delay: '00:10'
+      - service: sonos.join
+        data:
+          master: media_player.bedroom
+          entity_id:
+            - media_player.kitchen
+      - service: media_player.volume_set
+        data:
+          entity_id:
+            - media_player.bedroom
+            - media_player.kitchen
+          volume_level: 0.3
+      - service: media_player.select_source
+        data:
+          entity_id: media_player.bedroom
+          source: Bandit Rock
+      - service: notify.phone
+        data_template:
+          title: "Alarm clock"
+          message: "Turning on radio"
+      - condition: state
+        entity_id: input_boolean.alarm_clock_repeat
+        state: 'off'
+      - service: automation.turn_off
+        data:
+          entity_id: automation.trigger_alarm_clock
+
+group:
+  alarm_clock:
+    name: Alarm clock
+    control: hidden
+    entities:
+      - automation.trigger_alarm_clock
+      - input_datetime.alarm_clock_time
+      - input_boolean.alarm_clock_repeat
+      - input_boolean.alarm_clock_day_0
+      - input_boolean.alarm_clock_day_1
+      - input_boolean.alarm_clock_day_2
+      - input_boolean.alarm_clock_day_3
+      - input_boolean.alarm_clock_day_4
+      - input_boolean.alarm_clock_day_5
+      - input_boolean.alarm_clock_day_6

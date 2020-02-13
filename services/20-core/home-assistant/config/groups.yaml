@@ -6,3 +6,12 @@ housekeeping_view:
     - group.dishwasher
 #    - group.dryer
     - group.washingmachine
+
+sleeping_view:
+  name: Sleeping
+  icon: mdi:bed-empty
+  view: yes
+  entities:
+    - group.alarm_clock
+    - group.bedroom_lights
+    - media_player.bedroom

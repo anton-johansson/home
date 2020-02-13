@@ -12,3 +12,11 @@ light:
     name: Bedroom nightstand
     entities:
       - light.bedroom_nightstand_left
+      - light.bedroom_nightstand_right
+
+group:
+  bedroom_lights:
+    name: Lights
+    control: hidden
+    entities:
+      - light.bedroom_nightstand
