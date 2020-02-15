@@ -1,0 +1,48 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: samba
+  namespace: samba
+  labels:
+    apps.kubernetes.io/name: samba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps.kubernetes.io/name: samba
+  template:
+    metadata:
+      labels:
+        apps.kubernetes.io/name: samba
+    spec:
+      volumes:
+        - name: share
+          hostPath:
+            path: /media/external-drive
+      containers:
+        - name: samba
+          image: dperson/samba:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - -s
+            - share;/media/external-drive;no;no;no
+            - -p
+          volumeMounts:
+            - name: share
+              mountPath: /media/external-drive
+          env:
+            - name: USER
+              valueFrom:
+                secretKeyRef:
+                  name: users
+                  key: user
+          ports:
+            - name: smb-old
+              containerPort: 139
+              hostPort: 139
+              protocol: TCP
+            - name: smb-new
+              containerPort: 445
+              hostPort: 445
+              protocol: TCP
