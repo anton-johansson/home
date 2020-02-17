@@ -53,3 +53,5 @@ spec:
                 secretKeyRef:
                   name: webpage-stage-config
                   key: steamApiKey
+            - name: CRAWLING
+              value: disabled
