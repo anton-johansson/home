@@ -2,52 +2,35 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: nginx-config-external
+  name: nginx-config-internal
   namespace: ingress-nginx
 data:
   log-format-escape-json: 'true'
-  log-format-upstream: '{"time":"$time_iso8601","accessType":"request","accessClass":"external","remote_addr":"$remote_addr","request_id":"$req_id","remote_user":"$remote_user","bytes_sent":$bytes_sent,"request_time":$request_time,"status":"$status","host":"$host","request_protocol":"$server_protocol","path":"$uri","query_string":"$args","request_length":$request_length,"duration":$request_time,"method":"$request_method","referrer": "$http_referer","user_agent":"$http_user_agent","upstream_name":"$proxy_upstream_name","upstream_addr":"$upstream_addr","geo":{"country":"$geoip_country_code","city":"$geoip_city"}}'
-  log-format-stream: 'escape=json ''{"time":"$time_iso8601","accessType":"stream","accessClass":"external","remote_addr":"$remote_addr","bytes_sent":$bytes_sent,"status":"$status","request_protocol":"$protocol","session_time":$session_time,"upstream_name":"$proxy_upstream_name","upstream_addr":"$upstream_addr"}'''
+  log-format-upstream: '{"time":"$time_iso8601","accessType":"request","accessClass":"internal","remote_addr":"$remote_addr","request_id":"$req_id","remote_user":"$remote_user","bytes_sent":$bytes_sent,"request_time":$request_time,"status":"$status","host":"$host","request_protocol":"$server_protocol","path":"$uri","query_string":"$args","request_length":$request_length,"duration":$request_time,"method":"$request_method","referrer": "$http_referer","user_agent":"$http_user_agent","upstream_name":"$proxy_upstream_name","upstream_addr":"$upstream_addr","geo":{"country":"$geoip_country_code","city":"$geoip_city"}}'
+  log-format-stream: 'escape=json ''{"time":"$time_iso8601","accessType":"stream","accessClass":"internal","remote_addr":"$remote_addr","bytes_sent":$bytes_sent,"status":"$status","request_protocol":"$protocol","session_time":$session_time,"upstream_name":"$proxy_upstream_name","upstream_addr":"$upstream_addr"}'''
   server-tokens: 'false'
   client-body-buffer-size: 64K
 
 ---
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: tcp-services-external
-  namespace: ingress-nginx
-data:
-
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: udp-services-external
-  namespace: ingress-nginx
-
----
-kind: DaemonSet
+kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: nginx-external
+  name: nginx-internal
   namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: nginx
-    app.kubernetes.io/component: external
+    app.kubernetes.io/component: internal
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: nginx
-      app.kubernetes.io/component: external
-  updateStrategy:
-    # When we update the NGINX DaemonSet, we want to do it in a controlled manner.
-    type: OnDelete
+      app.kubernetes.io/component: internal
   template:
     metadata:
       labels:
         app.kubernetes.io/name: nginx
-        app.kubernetes.io/component: external
+        app.kubernetes.io/component: internal
       annotations:
         prometheus.io/scrape: 'true'
         prometheus.io/path: /metrics
@@ -58,14 +41,12 @@ spec:
         - name: nginx-ingress-controller
           image: 'quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.24.1'
           ports:
+            - name: health
+              containerPort: 10254
             - name: http
               containerPort: 80
-              hostPort: 80
-              hostIP: '10.0.0.10'
             - name: https
               containerPort: 443
-              hostPort: 443
-              hostIP: '10.0.0.10'
           env:
             - name: POD_NAMESPACE
               valueFrom:
@@ -79,7 +60,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /healthz
-              port: 10254
+              port: health
               scheme: HTTP
             periodSeconds: 10
             successThreshold: 1
@@ -88,7 +69,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /healthz
-              port: 10254
+              port: health
               scheme: HTTP
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -102,9 +83,34 @@ spec:
                 - NET_BIND_SERVICE
           args:
             - '/nginx-ingress-controller'
-            - '--ingress-class=external'
-            - '--configmap=$(POD_NAMESPACE)/nginx-config-external'
-            - '--tcp-services-configmap=$(POD_NAMESPACE)/tcp-services-external'
-            - '--udp-services-configmap=$(POD_NAMESPACE)/udp-services-external'
+            - '--ingress-class=internal'
+            - '--configmap=$(POD_NAMESPACE)/nginx-config-internal'
             - '--default-ssl-certificate=$(POD_NAMESPACE)/default-server-secret'
             - '--enable-ssl-chain-completion=false'
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-internal
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/component: internal
+spec:
+  selector:
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/component: internal
+  type: LoadBalancer
+  loadBalancerIP: 10.0.0.80
+  externalTrafficPolicy: Local
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: https
+      protocol: TCP
+

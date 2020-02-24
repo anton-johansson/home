@@ -1,0 +1,14 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: config
+  namespace: metallb
+data:
+  config: |
+    address-pools:
+      - name: services
+        protocol: layer2
+        auto-assign: false
+        addresses:
+          - 10.0.0.80-10.0.0.89

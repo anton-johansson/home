@@ -1,0 +1,115 @@
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: speaker
+  namespace: metallb
+
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: controller
+  namespace: metallb
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: psp:metallb
+roleRef:
+  kind: ClusterRole
+  name: psp:privileged
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: speaker
+    namespace: metallb
+  - kind: ServiceAccount
+    name: controller
+    namespace: metallb
+
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: config-watcher
+  namespace: metallb
+rules:
+  - apiGroups: ['']
+    resources: [configmaps]
+    verbs: [get, list, watch]
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metallb
+  namespace: metallb
+roleRef:
+  kind: Role
+  name: config-watcher
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: speaker
+  - kind: ServiceAccount
+    name: controller
+
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metallb:speaker
+rules:
+  - apiGroups: ['']
+    resources: [services, endpoints, nodes]
+    verbs: [get, list, watch]
+  - apiGroups: ['']
+    resources: [events]
+    verbs: [create, patch]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metallb:speaker
+roleRef:
+  kind: ClusterRole
+  name: metallb:speaker
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: speaker
+    namespace: metallb
+
+
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metallb:controller
+rules:
+  - apiGroups: ['']
+    resources: [services]
+    verbs: [get, list, watch, update]
+  - apiGroups: ['']
+    resources: [services/status]
+    verbs: [update]
+  - apiGroups: ['']
+    resources: [events]
+    verbs: [create, patch]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metallb:controller
+roleRef:
+  kind: ClusterRole
+  name: metallb:controller
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: controller
+    namespace: metallb
