@@ -11,4 +11,4 @@ data:
         protocol: layer2
         auto-assign: false
         addresses:
-          - 10.0.0.80-10.0.0.89
+          - 10.0.0.80-10.0.0.99
