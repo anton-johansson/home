@@ -16,18 +16,3 @@ $ git clone git@github.com:anton-johansson/home.git ~/projects/
 $ git clone git@github.com:amimof/kubernetes-the-right-way.git ~/projects/
 $ ansible-playbook --ask-become-password --inventory ~/projects/home/ktrw-inventory ~/projects/kubernetes-the-right-way/install.yml
 ```
-
-
-## Preparing
-
-Some files needs to be created in order for everything to run properly.
-
-```shell
-echo "<redacted>" | tee /home/$USER/home/home-assistant/bearer-token
-```
-
-## Running home tools
-
-```shell
-$ docker-compose start
-```
