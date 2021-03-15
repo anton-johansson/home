@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: factorio
-          image: factoriotools/factorio:1.1.26
+          image: factoriotools/factorio:1.1.27
           volumeMounts:
             - name: factorio
               mountPath: /factorio
