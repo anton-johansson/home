@@ -15,10 +15,10 @@ I'm using a Google WiFi mesh network setup.
 |           `.13` | Cellphone                                  | `anton-phone`   |
 |           `.14` | Chromecast                                 |
 |           `.15` | TV                                         |
-|           `.16` | Sonos PLAYBAR                              |
-|           `.17` | Sonos ONE (Kitchen)                        |
+|           `.16` | Sonos PLAYBAR                              | `sonos-playbar` |
+|           `.17` | Sonos ONE (Kitchen)                        | `sonos-kitchen` |
 |           `.18` | Nintendo Switch                            |
-|           `.19` | Sonos ONE (Bedroom)                        |
+|           `.19` | Sonos ONE (Bedroom)                        | `sonos-bedroom` |
 |  `.20` -  `.79` | Reserved for additional internal devices   |
 |           `.80` | NGINX for internal traffic                 |
 |           `.81` | NGINX for external traffic                 |
