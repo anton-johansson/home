@@ -19,7 +19,8 @@ I'm using a Google WiFi mesh network setup.
 |           `.17` | Sonos ONE (Kitchen)                        | `sonos-kitchen` |
 |           `.18` | Nintendo Switch                            |
 |           `.19` | Sonos ONE (Bedroom)                        | `sonos-bedroom` |
-|  `.20` -  `.79` | Reserved for additional internal devices   |
+|           `.20` | Sonos Roam                                 | `sonos-roam`    |
+|  `.21` -  `.79` | Reserved for additional internal devices   |
 |           `.80` | NGINX for internal traffic                 |
 |           `.81` | NGINX for external traffic                 |
 |  `.82` -  `.99` | Reserved for services hosted in Kubernetes |
