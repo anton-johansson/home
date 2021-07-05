@@ -1,0 +1,113 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: files
+
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: files
+  namespace: files
+data:
+  default.conf: |
+    server {
+      listen 80 default_server;
+      root /var/files;
+      try_files $uri /index.html;
+      location / {
+        autoindex on;
+      }
+    }
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: files
+  namespace: files
+  labels:
+    app.kubernetes.io/name: files
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: files
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: files
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.19.3-alpine
+          volumeMounts:
+            - name: files
+              mountPath: /var/files
+            - name: config
+              mountPath: /etc/nginx/conf.d
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+      volumes:
+        - name: files
+          hostPath:
+            path: /home/anton/home/files
+        - name: config
+          configMap:
+            name: files
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: files
+  namespace: files
+spec:
+  selector:
+    app.kubernetes.io/name: files
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+
+---
+kind: Certificate
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: files
+  namespace: files
+  labels:
+    app.kubernetes.io/name: files
+spec:
+  secretName: files-certificate
+  dnsNames:
+    - files.anton-johansson.com
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: files
+  namespace: files
+  annotations:
+    kubernetes.io/ingress.class: external
+spec:
+  rules:
+    - host: files.anton-johansson.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: files
+              servicePort: 8080
+  tls:
+    - secretName: files-certificate
+      hosts:
+        - files.anton-johansson.com
