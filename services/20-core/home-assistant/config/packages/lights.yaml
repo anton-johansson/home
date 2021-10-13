@@ -2,21 +2,10 @@
 # Configures all the lights of the home.
 #
 
-homeassistant:
-  customize:
-    sensor.daylight:
-      hidden: true
-
 light:
   - platform: group
-    name: Bedroom nightstand
+    unique_id: light.bedroom_nightstand
+    name: Nightstand
     entities:
       - light.bedroom_nightstand_left
       - light.bedroom_nightstand_right
-
-group:
-  bedroom_lights:
-    name: Lights
-    control: hidden
-    entities:
-      - light.bedroom_nightstand

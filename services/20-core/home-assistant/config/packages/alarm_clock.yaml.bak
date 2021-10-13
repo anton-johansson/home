@@ -96,18 +96,18 @@ automation:
         data:
           entity_id: automation.trigger_alarm_clock
 
-group:
-  alarm_clock:
-    name: Alarm clock
-    control: hidden
-    entities:
-      - automation.trigger_alarm_clock
-      - input_datetime.alarm_clock_time
-      - input_boolean.alarm_clock_repeat
-      - input_boolean.alarm_clock_day_0
-      - input_boolean.alarm_clock_day_1
-      - input_boolean.alarm_clock_day_2
-      - input_boolean.alarm_clock_day_3
-      - input_boolean.alarm_clock_day_4
-      - input_boolean.alarm_clock_day_5
-      - input_boolean.alarm_clock_day_6
+#group:
+#  alarm_clock:
+#    name: Alarm clock
+#    control: hidden
+#    entities:
+#      - automation.trigger_alarm_clock
+#      - input_datetime.alarm_clock_time
+#      - input_boolean.alarm_clock_repeat
+#      - input_boolean.alarm_clock_day_0
+#      - input_boolean.alarm_clock_day_1
+#      - input_boolean.alarm_clock_day_2
+#      - input_boolean.alarm_clock_day_3
+#      - input_boolean.alarm_clock_day_4
+#      - input_boolean.alarm_clock_day_5
+#      - input_boolean.alarm_clock_day_6

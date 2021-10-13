@@ -1,0 +1,15 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: zwave-js-server
+  namespace: home-assistant
+  labels:
+    app.kubernetes.io/name: zwave-js-server
+spec:
+  selector:
+    app.kubernetes.io/name: zwave-js-server
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP

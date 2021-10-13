@@ -2,38 +2,6 @@
 # Provides information and notifications about the washing machine and dryer.
 #
 
-homeassistant:
-  customize:
-    automation.washingmachine_started:
-      hidden: true
-      friendly_name: Washing machine started
-#    automation.dryer_started:
-#      hidden: true
-#      friendly_name: Dryer started
-    automation.washingmachine_completed:
-      hidden: true
-      friendly_name: Washing machine completed
-#    automation.dryer_completed:
-#      hidden: true
-#      friendly_name: Dryer completed
-    input_select.washingmachine_status:
-      hidden: true
-    input_select.dryer_status:
-      hidden: true
-    sensor.washingmachine_power_usage:
-      icon: mdi:flash
-#    sensor.dryer_power_usage:
-#      icon: mdi:flash
-    switch.powerplug_washingmachine:
-      hidden: true
-#    switch.powerplug_dryer:
-#      hidden: true
-  customize_glob:
-    sensor.powerplug_washingmachine*:
-      hidden: true
-#    sensor.powerplug_dryer*:
-#      hidden: true
-
 input_select:
   washingmachine_status:
     name: washingmachine_status
@@ -49,25 +17,11 @@ input_select:
 sensor:
   - platform: template
     sensors:
-      washingmachine_power_usage:
-        friendly_name: Washing machine power
-        unit_of_measurement: 'W'
-        value_template: >-
-          {{ states.sensor.powerplug_washingmachine_power.state }}
-#      dryer_power_usage:
-#        friendly_name: Dryer power
-#        unit_of_measurement: 'W'
-#        value_template: >-
-#          {{ states.sensor.powerplug_dryer_power.state }}
       washingmachine_status:
-        entity_id:
-          - input_select.washingmachine_status
         value_template: "{{ states.input_select.washingmachine_status.state }}"
         icon_template: mdi:washing-machine
         friendly_name: Washing machine status
 #      dryer_status:
-#        entity_id:
-#          - input_select.dryer_status
 #        value_template: "{{ states.input_select.dryer_status.state }}"
 #        icon_template: mdi:tumble-dryer
 #        friendly_name: Dryer status
@@ -77,7 +31,7 @@ automation:
   - alias: washingmachine_started
     trigger:
       - platform: numeric_state
-        entity_id: sensor.washingmachine_power_usage
+        entity_id: sensor.powerplug_washingmachine_power
         above: 5
         for:
           minutes: 1
@@ -95,7 +49,7 @@ automation:
   - alias: washingmachine_completed
     trigger:
       - platform: numeric_state
-        entity_id: sensor.washingmachine_power_usage
+        entity_id: sensor.powerplug_washingmachine_power
         below: 1
         for:
           minutes: 1
@@ -114,10 +68,10 @@ automation:
           message: The washing machine has finished and the laundry can be moved to the dryer
       - service: script.sonos_say
         data:
-          media_player: kitchen
-          volume: 0.3
+          entity_id: media_player.kitchen
+          volume: 30
           message: The washing machine has finished and the laundry can be moved to the dryer
-          delay: 00:00:04
+          delay: 00:00:05
 
 #  # Set the dryer to running state when the power usage goes up and it is in idle state
 #  - alias: dryer_started
@@ -161,20 +115,6 @@ automation:
 #      - service: script.sonos_say
 #        data:
 #          media_player: kitchen
-#          volume: 0.3
+#          volume: 30
 #          message: The dryer has finished
-#          delay: 00:00:03
-
-group:
-#  dryer:
-#    name: Dryer
-#    control: hidden
-#    entities:
-#      - sensor.dryer_status
-#      - sensor.dryer_power_usage
-  washingmachine:
-    name: Washing machine
-    control: hidden
-    entities:
-      - sensor.washingmachine_status
-      - sensor.washingmachine_power_usage
+#          delay: 00:00:04

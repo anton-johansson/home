@@ -2,28 +2,6 @@
 # Provides information and notifications about the dishwasher.
 #
 
-homeassistant:
-  customize:
-    automation.dishwasher_started:
-      hidden: true
-      friendly_name: Dishwasher started
-    automation.dishwasher_drying:
-      hidden: true
-      friendly_name: Dishwasher drying
-    automation.dishwasher_completed:
-      hidden: true
-      friendly_name: Dishwasher completed
-    input_select.dishwasher_status:
-      hidden: true
-    sensor.dishwasher_power_usage:
-      friendly_name: Dishwasher power
-      icon: mdi:flash
-    switch.powerplug_dishwasher:
-      hidden: true
-  customize_glob:
-    sensor.powerplug_dishwasher*:
-      hidden: true
-
 input_select:
   dishwasher_status:
     name: dishwasher_status
@@ -38,14 +16,12 @@ sensor:
       dishwasher_power_usage:
         unit_of_measurement: 'W'
         value_template: >-
-          {% if states.sensor.powerplug_dishwasher_power.state|float < 5000 %}
-            {{ states.sensor.powerplug_dishwasher_power.state }}
+          {% if states.sensor.powerplug_dishwasher_power_electric_consumption_w.state|float < 5000 %}
+            {{ states.sensor.powerplug_dishwasher_power_electric_consumption_w.state }}
           {% else %}
             0
           {% endif %}
       dishwasher_status:
-        entity_id:
-          - input_select.dishwasher_status
         value_template: "{{ states.input_select.dishwasher_status.state }}"
         icon_template: mdi:dishwasher
         friendly_name: Dishwasher status
@@ -114,15 +90,7 @@ automation:
           message: The dishwasher has finished and is ready to be emptied
       - service: script.sonos_say
         data:
-          media_player: kitchen
-          volume: 0.3
+          entity_id: media_player.kitchen
+          volume: 30
           message: The dishwasher has finished and is ready to be emptied
           delay: 00:00:04
-
-group:
-  dishwasher:
-    name: Dishwasher
-    control: hidden
-    entities:
-      - sensor.dishwasher_status
-      - sensor.dishwasher_power_usage

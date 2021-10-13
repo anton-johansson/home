@@ -46,12 +46,12 @@ sensor:
         icon_template: mdi:gamepad-variant
         friendly_name: Gaming PC
 
-group:
-  computer_activity:
-    name: Computer activity
-    control: hidden
-    entities:
-      - sensor.gaming_pc_status
+#group:
+#  computer_activity:
+#    name: Computer activity
+#    control: hidden
+#    entities:
+#      - sensor.gaming_pc_status
 
 automation:
   - id: turn_on_office_lightstrip
