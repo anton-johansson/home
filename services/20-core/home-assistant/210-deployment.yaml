@@ -1,0 +1,63 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: zwave-js-server
+  namespace: home-assistant
+  labels:
+    app.kubernetes.io/name: zwave-js-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: zwave-js-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: zwave-js-server
+    spec:
+      containers:
+        - name: zwave-js-server
+          image: 'kpine/zwave-js-server:1.10.7-8.5.0'
+          volumeMounts:
+            - name: cache
+              mountPath: /cache
+            - name: zwave-device
+              mountPath: /dev/zwave
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          securityContext:
+            privileged: true
+          env:
+            - name: S2_ACCESS_CONTROL_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zwave-js-server-keys
+                  key: s2-access-control-key
+            - name: S2_AUTHENTICATED_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zwave-js-server-keys
+                  key: s2-authenticated-key
+            - name: S2_UNAUTHENTICATED_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zwave-js-server-keys
+                  key: s2-unauthenticated-key
+            - name: S0_LEGACY_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zwave-js-server-keys
+                  key: s0-legacy-key
+      volumes:
+        - name: cache
+          hostPath:
+            path: /var/home-server/zwave-js-server
+        - name: zwave-device
+          hostPath:
+            path: /dev/ttyACM0

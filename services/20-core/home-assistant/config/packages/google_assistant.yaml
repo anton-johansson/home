@@ -4,14 +4,19 @@
 
 google_assistant:
   project_id: !secret google_assistant_project_id
-  api_key: !secret google_assistant_api_key
+  service_account: !include google_assistant_service_account.json
   expose_by_default: false
   entity_config:
     light.bedroom_nightstand:
       expose: true
-    light.corner_window_light:
+    light.kitchen_corner_window_light:
       expose: true
     light.office_lightstrip:
       expose: true
-    media_player.tv_screen:
+    light.ambilight:
       expose: true
+
+tts:
+  - platform: google_translate
+    service_name: google_say
+    base_url: !secret http_url

@@ -21,17 +21,18 @@ spec:
     spec:
       containers:
         - name: home-assistant
-          image: homeassistant/home-assistant:0.100.3
+          image: homeassistant/home-assistant:2021.10.4
           volumeMounts:
             - name: data
               mountPath: /config
-            - name: zwave-device
-              mountPath: /dev/zwave
             - name: zigbee-device
               mountPath: /dev/zigbee
           ports:
             - name: http
               containerPort: 8080
+              protocol: TCP
+            - name: sonos
+              containerPort: 1400
               protocol: TCP
           securityContext:
             privileged: true
@@ -39,9 +40,6 @@ spec:
         - name: data
           hostPath:
             path: /var/home-server/home-assistant
-        - name: zwave-device
-          hostPath:
-            path: /dev/ttyACM0
         - name: zigbee-device
           hostPath:
             path: /dev/ttyUSB0

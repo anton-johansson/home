@@ -1,43 +1,33 @@
 homeassistant:
   name: Home
+  external_url: !secret http_url
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
   unit_system: metric
   time_zone: Europe/Stockholm
   packages: !include_dir_named packages
-  customize: !include customize.yaml
 
 frontend:
 system_health:
 config:
-python_script:
 
 http:
-  base_url: !secret http_url
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.16.0.0/12
+    - 10.244.0.0/16
 
-zwave:
-  usb_path: /dev/zwave
+#conversation:
 
-zha:
-  usb_path: /dev/zigbee
-  radio_type: deconz
+#map:
 
-conversation:
+#sun:
 
-map:
+#tts:
+#  - platform: google_translate
+#    service_name: google_say
 
-sun:
+#cloud:
 
-tts:
-  - platform: google_translate
-    service_name: google_say
-
-cloud:
-
-group: !include groups.yaml
-script: !include scripts.yaml
+#group: !include groups.yaml
 zone: !include zones.yaml

@@ -1,0 +1,14 @@
+#
+# Notification related stuff.
+#
+
+notify:
+#  - platform: group
+#    name: phone
+#    services:
+#      - service: mobile_app_anton_johansson_s_pixel_4
+  - platform: group
+    name: home
+    services:
+#      - service: phone
+      - service: android_tv

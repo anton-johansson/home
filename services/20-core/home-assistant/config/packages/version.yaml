@@ -6,21 +6,14 @@ homeassistant:
   customize:
     sensor.version_current:
       friendly_name: Current version
-      hidden: true
     sensor.version_latest:
       friendly_name: Latest version
-      hidden: true
-    binary_sensor.version_available:
-      hidden: true
-    automation.notify_when_update_is_available:
-      hidden: true
 
 sensor:
   - platform: command_line
     name: version_current
     command: cat /config/.HA_VERSION
     scan_interval: 3600
-
   - platform: command_line
     name: version_latest
     command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
@@ -40,17 +33,17 @@ binary_sensor:
             mdi:alert-box
           {% endif %}
 
-automation:
-  - alias: notify_when_update_is_available
-    trigger:
-      platform: state
-      entity_id: sensor.version_latest
-    condition:
-      - condition: state
-        entity_id: binary_sensor.version_available
-        state: 'on'
-    action:
-      service: notify.phone
-      data_template:
-        title: "New Home Assistant version"
-        message: "Version {{ states.sensor.version_latest.state }} for Home Assistant is available."
+#automation:
+#  - alias: notify_when_update_is_available
+#    trigger:
+#      platform: state
+#      entity_id: sensor.version_latest
+#    condition:
+#      - condition: state
+#        entity_id: binary_sensor.version_available
+#        state: 'on'
+#    action:
+#      service: notify.phone
+#      data_template:
+#        title: "New Home Assistant version"
+#        message: "Version {{ states.sensor.version_latest.state }} for Home Assistant is available."

@@ -2,13 +2,9 @@
 # Controls all sound components in the home
 #
 
-homeassistant:
-  customize:
-    script.sonos_say:
-      hidden: true
-
 sonos:
   media_player:
+    advertise_addr: !secret sonos_advertise_address
     hosts:
       - !secret sonos_playbar_hostname
       - !secret sonos_kitchen_hostname
@@ -17,23 +13,54 @@ sonos:
 
 script:
   sonos_say:
-    alias: "Sonos TTS script"
+    alias: "Text-to-Speech (TTS): Say a message using a Sonos device"
+    fields:
+      entity_id:
+        name: "Sonos player"
+        description: "The Sonos device that you wish to say the message from."
+        required: true
+        selector:
+          entity:
+            domain: media_player
+      message:
+        name: "Message"
+        description: "The message that you wish to say."
+        required: true
+        selector:
+          text:
+      volume:
+        name: "Volume"
+        description: "The volume to say it in."
+        required: true
+        selector:
+          number:
+            min: 0
+            max: 100
+            unit_of_measurement: "%"
+        default: 30
+      delay:
+        name: "Delay"
+        description: "The number of seconds to wait until the Sonos groups are restored."
+        required: true
+        selector:
+          text:
+        default: "00:00:05"
     sequence:
      - service: sonos.snapshot
        data_template:
-         entity_id: "{{ 'media_player.' ~ media_player }}"
+         entity_id: "{{ entity_id }}"
      - service: sonos.unjoin
        data_template:
-         entity_id: "{{ 'media_player.' ~ media_player }}"
+         entity_id: "{{ entity_id }}"
      - service: media_player.volume_set
        data_template:
-         entity_id: "{{ 'media_player.' ~ media_player }}"
-         volume_level: "{{ volume }}"
+         entity_id: "{{ entity_id }}"
+         volume_level: "{{ volume | float / 100.0 }}"
      - service: tts.google_say
        data_template:
-         entity_id: "{{ 'media_player.' ~ media_player }}"
+         entity_id: "{{ entity_id }}"
          message: "{{ message }}"
      - delay: "{{ delay }}"
      - service: sonos.restore
        data_template:
-         entity_id: "{{ 'media_player.' ~ media_player }}"
+         entity_id: "{{ entity_id }}"
