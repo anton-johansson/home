@@ -14,7 +14,6 @@ config:
 python_script:
 
 http:
-  api_password: !secret http_password
   base_url: !secret http_url
   use_x_forwarded_for: true
   trusted_proxies:
