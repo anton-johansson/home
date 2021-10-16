@@ -1,0 +1,9 @@
+#
+# Connects with the Xiaomi fan
+#
+
+fan:
+  - platform: xiaomi_miio_fan
+    name: Standing fan
+    host: 10.0.0.21
+    token: 75403449733d06e5bc64dca3d1ca3d08
