@@ -1,8 +1,0 @@
-sudo: required
-services:
-  - docker
-script:
-  - home-assistant/test.sh
-  - logstash/test/run.sh
-before_install:
-  - cp home-assistant/.travis-secrets.yaml home-assistant/secrets.yaml
