@@ -1,0 +1,51 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: satisfactory
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: satisfactory-server
+  namespace: satisfactory
+  labels:
+    app.kubernetes.io/name: satisfactory-server
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: satisfactory-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: satisfactory-server
+    spec:
+      containers:
+        - name: satisfactory-server
+          image: antonjohansson/satisfactory-server:u5-173452
+          ports:
+            - name: game
+              containerPort: 7777
+              hostPort: 7777
+              protocol: UDP
+            - name: beacon
+              containerPort: 15000
+              hostPort: 15000
+              protocol: UDP
+            - name: query
+              containerPort: 15777
+              hostPort: 15777
+              protocol: UDP
+          volumeMounts:
+            - name: game-saves
+              mountPath: /home/steam/.config/Epic/FactoryGame/Saved/SaveGames/server/
+      volumes:
+        - name: game-saves
+          hostPath:
+            path: /var/satisfactory-server/game-saves
