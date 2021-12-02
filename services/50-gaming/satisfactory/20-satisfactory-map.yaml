@@ -1,0 +1,86 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: satisfactory-map
+  namespace: satisfactory
+  labels:
+    app.kubernetes.io/name: satisfactory-map
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: satisfactory-map
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: satisfactory-map
+    spec:
+      containers:
+        - name: satisfactory-map
+          image: httpd:alpine3.14
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: game-saves
+              mountPath: /usr/local/apache2/htdocs/
+      volumes:
+        - name: game-saves
+          hostPath:
+            path: /var/satisfactory-server/game-saves
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: satisfactory-map
+  namespace: satisfactory
+  labels:
+    app.kubernetes.io/name: satisfactory-map
+spec:
+  selector:
+    app.kubernetes.io/name: satisfactory-map
+  ports:
+    - name: http
+      port: 80
+
+---
+kind: Certificate
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: satisfactory-map
+  namespace: satisfactory
+spec:
+  secretName: satisfactory-map-certificate
+  dnsNames:
+    - satisfactory-map.anton-johansson.com
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: satisfactory-map
+  namespace: satisfactory
+  labels:
+    app.kubernetes.io/name: satisfactory-map
+  annotations:
+    kubernetes.io/ingress.class: external
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+spec:
+  rules:
+    - host: satisfactory-map.anton-johansson.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: satisfactory-map
+              servicePort: 80
+  tls:
+    - secretName: satisfactory-map-certificate
+      hosts:
+        - satisfactory-map.anton-johansson.com
