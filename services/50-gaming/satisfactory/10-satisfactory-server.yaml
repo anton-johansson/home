@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: satisfactory-server
-          image: antonjohansson/satisfactory-server:u5-174686
+          image: antonjohansson/satisfactory-server:u5-174799
           ports:
             - name: game
               containerPort: 7777
