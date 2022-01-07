@@ -38,3 +38,4 @@ I'm using a Google WiFi mesh network setup.
 | SSH      |          `22` |          `22` |     `.10` |
 | HTTP     |          `80` |          `80` |     `.10` |
 | HTTPS    |         `443` |         `443` |     `.10` |
+| Factorio |       `34197` |       `32407` |     `.10` |
