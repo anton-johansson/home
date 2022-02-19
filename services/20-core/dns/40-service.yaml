@@ -1,0 +1,17 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: coredns
+  namespace: dns
+  labels:
+    app.kubernetes.io/name: dns
+spec:
+  selector:
+    app.kubernetes.io/name: dns
+  type: LoadBalancer
+  loadBalancerIP: 10.0.0.84
+  ports:
+    - name: dns-udp
+      port: 53
+      protocol: UDP

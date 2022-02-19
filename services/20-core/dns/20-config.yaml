@@ -1,0 +1,22 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: coredns
+  namespace: dns
+data:
+  Corefile: |
+    . {
+      errors
+      health
+      prometheus :9153
+      cache 30
+      loop
+      loadbalance
+      hosts {
+        10.0.0.82 cert-manager-webhook.anton-johansson.local
+        10.0.0.80 prometheus.anton-johansson.local
+        fallthrough
+      }
+      forward . 8.8.8.8 8.8.4.4
+    }

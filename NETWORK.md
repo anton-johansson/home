@@ -26,7 +26,8 @@ I'm using a Google WiFi mesh network setup.
 |           `.81` | NGINX for external traffic                 |
 |           `.82` | Cert-Manager Webhook                       |
 |           `.83` | Home Assistant Sonos integration           |
-|  `.84` -  `.99` | Reserved for services hosted in Kubernetes |
+|           `.84` | Local DNS server (CoreDNS)                 |
+|  `.85` -  `.99` | Reserved for services hosted in Kubernetes |
 | `.100` - `.254` | Common DHCP pool                           |
 
 \* These can be smart switches or additional WiFi points. Currently, my additional WiFi points cannot have static IP addresses, so they're using the regular DHCP pool, but if that ever changes, they'll be moved to this reservation.
