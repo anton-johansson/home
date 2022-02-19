@@ -1,6 +1,6 @@
 ---
 kind: Certificate
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: webpage-prod
   namespace: webpage
@@ -21,7 +21,7 @@ spec:
 
 ---
 kind: Certificate
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: webpage-stage
   namespace: webpage

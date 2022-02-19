@@ -1,6 +1,6 @@
 ---
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: webpage-prod
   namespace: webpage
@@ -17,9 +17,12 @@ spec:
       http: &http
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: webpage
-              servicePort: 80
+              service:
+                name: webpage
+                port:
+                  number: 80
     - host: anton-johansson.se
       http: *http
   tls:
@@ -30,7 +33,7 @@ spec:
 
 ---
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: webpage-stage
   namespace: webpage
@@ -45,9 +48,12 @@ spec:
       http: &http
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: webpage-stage
-              servicePort: 4000
+              service:
+                name: webpage-stage
+                port:
+                  number: 4000
     - host: stage.anton-johansson.se
       http: *http
   tls:
