@@ -1,3 +1,11 @@
+installCRDs: true
 webhook:
-  enabled: false
+  url:
+    host: cert-manager-webhook.anton-johansson.local
+  serviceType: LoadBalancer
+  loadBalancerIP: '10.0.0.82'
+podDnsPolicy: None
+podDnsConfig:
+  nameservers:
+    - '8.8.8.8'
 

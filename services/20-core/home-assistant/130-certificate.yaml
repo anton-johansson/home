@@ -1,13 +1,13 @@
 ---
 kind: Certificate
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: home-assistant
   namespace: home-assistant
   labels:
     app.kubernetes.io/name: home-assistant
 spec:
-  secretName: home-assistant-certificate
+  secretName: home-assistant-updated-certificate
   dnsNames:
     - home.anton-johansson.com
   issuerRef:

@@ -24,6 +24,7 @@ I'm using a Google WiFi mesh network setup.
 |  `.21` -  `.79` | Reserved for additional internal devices   |
 |           `.80` | NGINX for internal traffic                 |
 |           `.81` | NGINX for external traffic                 |
+|           `.82` | Cert-Manager Webhook                       |
 |           `.83` | Home Assistant Sonos integration           |
 |  `.84` -  `.99` | Reserved for services hosted in Kubernetes |
 | `.100` - `.254` | Common DHCP pool                           |

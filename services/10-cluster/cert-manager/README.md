@@ -8,20 +8,12 @@ I'm using [cert-manager](https://github.com/jetstack/cert-manager) to automatica
 We use Helm 3 to install cert-manager:
 
 ```
-$ kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
 $ kubectl create namespace cert-manager
 $ helm repo add jetstack https://charts.jetstack.io
-$ helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.12.0 --values helm-values.yaml
+$ helm repo update
+$ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.7.1 --values helm-values.yaml
 $ kubectl apply -f issuers.yaml
 ```
-
-For any future upgrades, this command can be used:
-
-```
-$ helm upgrade cert-manager jetstack/cert-manager --namespace cert-manager --version v0.12.0 --values helm-values.yaml
-```
-
-Note: I've disabled the `webhook` component, because I didn't get it to work properly. It's not recommended, but it's viable option. Read more [here](https://cert-manager.io/docs/installation/compatibility/#disabling-webhook).
 
 
 ## Using it
@@ -31,7 +23,7 @@ To use dynamic SSL certificates, you create `Certificate` resources. These resou
 ```yaml
 ---
 kind: Certificate
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: some-service
   namespace: test
@@ -46,7 +38,7 @@ spec:
 
 ---
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: some-service
   namespace: test
@@ -60,9 +52,12 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: some-service
-              servicePort: 8080
+              service:
+                name: some-service
+                port:
+                  number: 8080
   tls:
     - secretName: some-service-certificate
       hosts:

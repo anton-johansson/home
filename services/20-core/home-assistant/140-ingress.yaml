@@ -1,6 +1,6 @@
 ---
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: home-assistant
   namespace: home-assistant
@@ -14,10 +14,13 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: home-assistant
-              servicePort: 8123
+              service:
+                name: home-assistant
+                port:
+                  number: 8123
   tls:
-    - secretName: home-assistant-certificate
+    - secretName: home-assistant-updated-certificate
       hosts:
         - home.anton-johansson.com

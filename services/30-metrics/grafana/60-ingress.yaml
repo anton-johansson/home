@@ -1,6 +1,6 @@
 ---
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: grafana
   namespace: grafana
@@ -14,10 +14,13 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: grafana
-              servicePort: 3000
+              service:
+                name: grafana
+                port:
+                  number: 3000
   tls:
-    - secretName: grafana-certificate
+    - secretName: grafana-updated-certificate
       hosts:
         - grafana.anton-johansson.com
