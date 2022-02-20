@@ -15,27 +15,7 @@ $ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-man
 ```
 
 
-## Custom certificate authority for local home services
-
-### Private key
-
-
-This generates the `anton-johansson-home-services-ca.key`. This needs to be kept secret and is used to create the actual certificate that we need to trust.
-
-### Certificate
-
-```
-$ openssl req -x509 -new -nodes -key anton-johansson-ca.key -sha256 -days 7300 -out anton-johansson-ca.pem -subj '/C=SE/CN=Anton Johansson Certificate Authority/O=Anton Johansson'
-```
-
-This generates the actual certificate that we need to trust.
-
-### Signing new certificates
-
-Use the private key and the certificate to create and sign new certificates. For now, we are using cert-manager to do this for us, but it can be done separately too.
-
-
-### Issuers
+## Issuers
 
 Generate the intermediate certificate authority for home services:
 
