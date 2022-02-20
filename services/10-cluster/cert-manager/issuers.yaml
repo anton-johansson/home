@@ -29,3 +29,12 @@ spec:
       - http01:
           ingress:
             class: external
+
+---
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1
+metadata:
+  name: anton-johansson-home-services-ca
+spec:
+  ca:
+    secretName: anton-johansson-home-services-ca

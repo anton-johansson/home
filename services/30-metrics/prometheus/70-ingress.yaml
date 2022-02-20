@@ -1,6 +1,6 @@
 ---
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: prometheus
   namespace: prometheus
@@ -14,6 +14,13 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: prometheus
-              servicePort: 9090
+              service:
+                name: prometheus
+                port:
+                  number: 9090
+  tls:
+    - secretName: prometheus-certificate
+      hosts:
+        - prometheus.anton-johansson.local
